@@ -86,7 +86,6 @@ model User {
 
   @@index([email])
 }
-
 model VerificationToken {
   identifier String
   token      String   @unique
