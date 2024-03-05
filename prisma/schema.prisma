@@ -30,6 +30,8 @@ model Widgets {
   name           String           @unique
   description    String
   Layout_Widgets Layout_Widgets[]
+
+  @@index([name])
 }
 
 //Layout_Widget schema
@@ -80,6 +82,8 @@ model User {
   accounts      Account[]
   sessions      Session[]
   Layouts       Layouts[]
+
+  @@index([email])
 }
 
 model VerificationToken {
