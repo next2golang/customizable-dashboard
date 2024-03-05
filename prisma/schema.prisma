@@ -23,6 +23,12 @@ model Layouts {
   createdById String
 }
 
+//Widget schema
+model Widgets {
+  id             String           @id @default(cuid())
+  name           String           @unique
+  description    String
+}
 // Necessary for Next auth
 model Account {
   id                String  @id @default(cuid())
