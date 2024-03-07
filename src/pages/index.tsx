@@ -9,7 +9,7 @@ export default function Home() {
   const { status } = useSession({
     required: true,
     onUnauthenticated() {
-      router.push("/login");
+      router.push("/login").catch((err) => { console.log('error', err) });
     },
   });
 
