@@ -7,6 +7,7 @@ import { ethers } from 'ethers';
 import { signIn, useSession } from 'next-auth/react';
 import { useAccount } from 'wagmi'
 
+
 import {
     Card,
     CardContent,
@@ -40,7 +41,7 @@ export default function Home() {
                         <CardTitle className="text-center text-2xl text-white">Welcome to Trial-Task</CardTitle>
                     </CardHeader>
                     <CardFooter className="flex justify-center pb-2">
-                        {status === 'unauthenticated' && !isConnected ? <ConnectButton label={'LogIn with rainbowkit'} /> : <div></div>}
+                        {status === 'unauthenticated' && !isConnected ? <ConnectButton label={'LogIn with rainbowkit'} /> : <span>Loading...</span>}
                     </CardFooter>
                 </Card>
             </div>
