@@ -1,18 +1,16 @@
-import { type AppType } from "next/app";
-import { Inter } from "next/font/google";
+import { type AppType } from 'next/app';
+import { ThemeProvider } from 'next-themes';
+import '~/styles/globals.css';
 
-import "~/styles/globals.css";
-
-const inter = Inter({
-  subsets: ["latin"],
-  variable: "--font-sans",
-});
+import { Layout } from '~/components/layout';
 
 const MyApp: AppType = ({ Component, pageProps }) => {
   return (
-    <main className={`font-sans ${inter.variable}`}>
-      <Component {...pageProps} />
-    </main>
+      <ThemeProvider attribute='class' defaultTheme='system' enableSystem>
+        <Layout>
+          <Component {...pageProps} />
+        </Layout>
+      </ThemeProvider>
   );
 };
 
