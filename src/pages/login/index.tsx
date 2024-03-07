@@ -1,3 +1,6 @@
+/* eslint-disable @typescript-eslint/no-unsafe-member-access */
+/* eslint-disable @typescript-eslint/no-unsafe-assignment */
+/* eslint-disable @typescript-eslint/no-unsafe-argument */
 import * as React from 'react'
 import Link from 'next/link';
 
@@ -15,7 +18,7 @@ import {
 
 declare global {
     interface Window {
-        ethereum?: any;
+        ethereum?: any; // eslint-disable-line @typescript-eslint/no-explicit-any
     }
 }
 
@@ -126,6 +129,7 @@ export default function Home() {
 
 // This function requests a nonce then signs it, proving that
 //  the user owns the public address they are using
+
 async function onSignInWithCrypto() {
     try {
         if (!window.ethereum) {
@@ -136,6 +140,7 @@ async function onSignInWithCrypto() {
         // Get the wallet provider, the signer and address
         //  see: https://docs.ethers.org/v6/getting-started/#starting-signing
         const provider = new ethers.BrowserProvider(window.ethereum);
+        console.log(window.ethereum)
         const signer = await provider.getSigner();
         const walletAddress = await signer.getAddress();
 
