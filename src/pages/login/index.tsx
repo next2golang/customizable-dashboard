@@ -1,5 +1,9 @@
 import * as React from 'react'
 import Link from 'next/link';
+
+import { ethers } from 'ethers';
+import { signIn } from 'next-auth/react';
+
 import {
     Card,
     CardContent,
@@ -8,6 +12,12 @@ import {
     CardHeader,
     CardTitle,
 } from '~/components/ui/card'
+
+declare global {
+    interface Window {
+        ethereum?: any;
+    }
+}
 
 export default function Home() {
     return (
@@ -19,8 +29,10 @@ export default function Home() {
                         <CardTitle className="text-center text-2xl text-white">Welcome to Trial-Task</CardTitle>
                     </CardHeader>
                     <CardFooter className="flex justify-center pb-2">
-                        <Link className="flex justify-center align-middle mx-10 normal-case transition-all font-semibold rounded h-10 min-h-[2.5rem] text-lg px-4 text-fg-interactive bg-blue-500 border-primar hover:bg-blue-400 focus:bg-blue-500 focus:border-primary-focus w-full"
-                            href='/'><span className="flex items-center justify-center gap-x-1"><div className="flex gap-x-2"><span className="flex items-center justify-center text-fg-interactive h-5 w-5"><svg version="1.0" xmlns="http://www.w3.org/2000/svg" className="w-full h-full object-contain" viewBox="0 0 1024.000000 1024.000000" preserveAspectRatio="xMidYMid meet"><g transform="translate(0.000000,1024.000000) scale(0.100000,-0.100000)" fill="white" stroke="none"><path d="M7672 8691 c-41 -42 -234 -240 -430 -440 -197 -200 -395 -402 -441
+                        <div
+                            className="flex justify-center align-middle mx-10 normal-case transition-all font-semibold rounded h-10 min-h-[2.5rem] text-lg px-4 text-fg-interactive bg-blue-500 border-primar hover:bg-blue-400 hover:cursor-pointer focus:bg-blue-500 focus:border-primary-focus w-full"
+                            onClick={onSignInWithCrypto}
+                        ><span className="flex items-center justify-center gap-x-1"><div className="flex gap-x-2"><span className="flex items-center justify-center text-fg-interactive h-5 w-5"><svg version="1.0" xmlns="http://www.w3.org/2000/svg" className="w-full h-full object-contain" viewBox="0 0 1024.000000 1024.000000" preserveAspectRatio="xMidYMid meet"><g transform="translate(0.000000,1024.000000) scale(0.100000,-0.100000)" fill="white" stroke="none"><path d="M7672 8691 c-41 -42 -234 -240 -430 -440 -197 -200 -395 -402 -441
                 -450 -46 -47 -227 -233 -403 -413 -515 -526 -586 -600 -851 -872 -139 -142
                 -253 -262 -255 -267 -2 -5 37 -76 87 -158 50 -83 91 -152 91 -154 0 -2 28 -52
                 63 -110 34 -57 69 -118 79 -133 9 -16 44 -76 78 -134 35 -58 74 -125 88 -150
@@ -104,7 +116,7 @@ export default function Home() {
                 674 -113 118 -272 284 -355 369 -83 85 -193 200 -245 254 -52 55 -115 120
                 -140 146 -25 25 -133 138 -240 250 -187 196 -401 418 -485 505 -22 23 -94 97
                 -160 166 -66 68 -194 201 -284 294 -90 94 -191 199 -225 235 -33 35 -133 139
-                -221 230 -234 242 -424 440 -471 491 -48 53 -104 105 -104 97z"></path></g></svg></span></div></span></Link>
+                -221 230 -234 242 -424 440 -471 491 -48 53 -104 105 -104 97z"></path></g></svg></span></div></span></div>
                     </CardFooter>
                 </Card>
             </div>
@@ -112,3 +124,43 @@ export default function Home() {
     );
 }
 
+// This function requests a nonce then signs it, proving that
+//  the user owns the public address they are using
+async function onSignInWithCrypto() {
+    try {
+        if (!window.ethereum) {
+            window.alert("Please install MetaMask first.");
+            return;
+        }
+
+        // Get the wallet provider, the signer and address
+        //  see: https://docs.ethers.org/v6/getting-started/#starting-signing
+        const provider = new ethers.BrowserProvider(window.ethereum);
+        const signer = await provider.getSigner();
+        const walletAddress = await signer.getAddress();
+
+        // Send the public address to generate a nonce associates with our account
+        const response = await fetch("/api/auth/crypto/generateNonce", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+                walletAddress,
+            }),
+        });
+        const responseData = await response.json();
+
+        // Sign the received nonce
+        const signedNonce = await signer.signMessage(responseData.nonce);
+
+        // Use NextAuth to sign in with our address and the nonce
+        await signIn("crypto", {
+            walletAddress,
+            signedNonce,
+            callbackUrl: "/",
+        });
+    } catch {
+        window.alert("Error with signing, please try again.");
+    }
+}
