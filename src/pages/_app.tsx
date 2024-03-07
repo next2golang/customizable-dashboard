@@ -66,6 +66,7 @@ const MyApp: AppType<{ session: Session | null }> = ({
   pageProps: { session, ...pageProps },
 }: AppProps) => {
   const { locale } = useRouter() as { locale: Locale };
+  // const { status } = useSession();
   return (
     // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
     <SessionProvider session={session}>
