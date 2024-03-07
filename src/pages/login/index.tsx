@@ -151,6 +151,7 @@ async function onSignInWithCrypto() {
         });
         const responseData = await response.json();
 
+        console.log(responseData)
         // Sign the received nonce
         const signedNonce = await signer.signMessage(responseData.nonce);
 
