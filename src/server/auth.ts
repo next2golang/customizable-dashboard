@@ -82,6 +82,10 @@ async function authorizeCrypto(
  * @see https://next-auth.js.org/configuration/options
  */
 export const authOptions: NextAuthOptions = {
+  pages: {
+    signIn: "/login",
+    error: "/login",
+  },
   callbacks: {
     session: ({ session, user }) => ({
       ...session,
@@ -93,6 +97,15 @@ export const authOptions: NextAuthOptions = {
   },
   adapter: PrismaAdapter(db) as Adapter,
   providers: [
+    CredentialsProvider({
+      id: "crypto",
+      name: "Crypto Wallet Auth",
+      credentials: {
+        walletAddress: { label: "Wallet Address", type: "text" },
+        signedNonce: { label: "Signed Nonce", type: "text" },
+      },
+      authorize: authorizeCrypto,
+    }),
     DiscordProvider({
       clientId: env.DISCORD_CLIENT_ID,
       clientSecret: env.DISCORD_CLIENT_SECRET,
