@@ -31,6 +31,7 @@ import {
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 
 import { Layout } from '~/components/layout';
+import { ConfigProvider } from 'antd';
 
 import '~/styles/globals.css';
 import '@rainbow-me/rainbowkit/styles.css';
@@ -74,9 +75,28 @@ const MyApp: AppType<{ session: Session | null }> = ({
         <QueryClientProvider client={queryClient}>
           <RainbowKitProvider locale={locale}>
             <ThemeProvider attribute='class' defaultTheme='system' enableSystem>
-              <Layout>
-                <Component {...pageProps} />
-              </Layout>
+              <ConfigProvider
+                theme={{
+                  token: {
+                    colorBgContainer: "#154beb",
+                    colorBorderSecondary: "#154beb",
+                    colorText: "#a4a5a7"
+                  },
+                  components: {
+                    Tabs: {
+                      cardBg: "#11141d",
+                      inkBarColor: "#11141d",
+                      itemColor: "rgba(255, 255, 255, 0.88)",
+                      itemSelectedColor: "rgba(255, 255, 255, 0.88)"
+                      /* here is your component tokens */
+                    },
+                  },
+                }}
+              >
+                <Layout>
+                  <Component {...pageProps} />
+                </Layout>
+              </ConfigProvider>
             </ThemeProvider>
           </RainbowKitProvider>
         </QueryClientProvider>
