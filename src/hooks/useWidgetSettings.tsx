@@ -5,15 +5,15 @@ import { KeyValueString } from '../../types';
 import { getSettingsApiUrl, logOut } from '../utils/appUtils';
 
 const fetchSettings = async (wid: string) => {
-  const { data, error } = await apiGet(getSettingsApiUrl(0, wid), {
-    // noCache: true // don't do this as there are many same requests => use timestamp in getSettingsApiUrl.
-  });
-  if (error) {
-    // jwtToken expired, etc.
-    // logOut(); // this caused infinite loop
-  } else {
-    return data.settings;
-  }
+  // const { data, error } = await apiGet(getSettingsApiUrl(0, wid), {
+  //   // noCache: true // don't do this as there are many same requests => use timestamp in getSettingsApiUrl.
+  // });
+  // if (error) {
+  //   // jwtToken expired, etc.
+  //   // logOut(); // this caused infinite loop
+  // } else {
+  //   return data.settings;
+  // }
 };
 
 export const useWidgetSettings = (wid: string, callback: (settings: KeyValueString) => void) => {
@@ -37,20 +37,20 @@ export const useWidgetSettings = (wid: string, callback: (settings: KeyValueStri
   // ------------- helper functions ------------- //
 
   const saveSettings = async (settings: KeyValueString) => {
-    const { data, error, status } = await apiPost(getSettingsApiUrl(0, wid), {
-      payload: settings
-    });
-    if (error) {
-      if (status === 403) {
-        logOut();
-      }
-    }
-    return { data, error };
+    // const { data, error, status } = await apiPost(getSettingsApiUrl(0, wid), {
+    //   payload: settings
+    // });
+    // if (error) {
+    //   if (status === 403) {
+    //     logOut();
+    //   }
+    // }
+    // return { data, error };
   };
 
   return { settings, setSettings, saveSettings, settingsShowed, toggleSettings };
 };
 
 export async function deleteSettings(wid: string) {
-  return apiDelete(getSettingsApiUrl(0, wid), {});
+  // return apiDelete(getSettingsApiUrl(0, wid), {});
 }

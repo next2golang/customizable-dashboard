@@ -6,15 +6,15 @@ export function saveTabLS(tab: number, userWidgets: any[], userLayout: any[]) {
 }
 
 export async function saveTabDB(tab: number, userWidgets: any[], userLayout: any[]) {
-  const { error } = await apiPost('/api/user/settings', {
-    payload: {
-      tab: 0,
-      userWidgets,
-      userLayout
-    }
-  });
-  if (error) {
-    <></>
-    // TBD
-  }
+  // const { error } = await apiPost('/api/user/settings', {
+  //   payload: {
+  //     tab: 0,
+  //     userWidgets,
+  //     userLayout
+  //   }
+  // });
+  // if (error) {
+  //   <></>
+  //   // TBD
+  // }
 }

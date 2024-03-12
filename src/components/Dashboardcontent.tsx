@@ -29,7 +29,13 @@ import AddWidgetModal from '~/components/base/AddWidgetModal/AddWidgetModal';
 import { RenameDialog } from './RenameDialog'
 import { DeleteDialog } from './DeleteDialog'
 
-export default function Dashboardcontent() {
+interface DashboardContentProps {
+  title: string;
+  onTitleChange: (nTitle: string) => void;
+}
+export const Dashboardcontent: React.FC<DashboardContentProps> = ({ title, onTitleChange }) => {
+  console.log(title)
+
   const ResponsiveGridLayout = WidthProvider(Responsive);
   const { tabSettings, setTabSettings } = useAppContext();
 
@@ -144,6 +150,7 @@ export default function Dashboardcontent() {
     }
   };
 
+  console.log(userWidgets)
   return (
     <>
       <div className="flex mt-5 items-center ">
@@ -154,7 +161,7 @@ export default function Dashboardcontent() {
         </span>
 
         <span className="mr-5">
-          <RenameDialog />
+          <RenameDialog title={title} onTitleChange={onTitleChange} />
         </span>
 
         <span>

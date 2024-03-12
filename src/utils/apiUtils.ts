@@ -39,8 +39,8 @@ export async function dummyFetch(mockData = []) {
 }
 
 const catchError = (err: any) => {
-  console.error('catchError', err, err?.response);
-  return { error: { message: typeof err === 'object' ? err?.message : err }, status: err?.response?.status };
+  // console.error('catchError', err, err?.response);
+  // return { error: { message: typeof err === 'object' ? err?.message : err }, status: err?.response?.status };
 };
 
 interface ApiParams {
@@ -58,7 +58,7 @@ export const apiGet = async (path: string, params?: ApiParams) => {
   let url = `${path}${queryStr}`;
   url = url.startsWith('@') ? url.replace(/@/, `${UI_API_BASE}`) : url;
 
-  
+
   if (cache[url] && params?.noCache !== true) {
     return cache[url].content;
   }
@@ -73,11 +73,11 @@ export const apiGet = async (path: string, params?: ApiParams) => {
     cache[url] = { content: { data, status } }; // cache output
     return { data, status };
   } catch (err: any) {
-    const { error, status } = catchError(err);
-    if (status === 401) {
-      return { error: new Error('Unauthorized'), status };
-    }
-    return { error, status };
+    // // const { error, status } = catchError(err);
+    // if (status === 401) {
+    //   return { error: new Error('Unauthorized'), status };
+    // }
+    // return { error, status };
   }
 };
 
@@ -96,9 +96,9 @@ export const apiPost = async (path: string, params?: ApiParams) => {
 
     return { data, status };
   } catch (err: any) {
-    const { error, status } = catchError(err);
+    // const { error, status } = catchError(err);
 
-    return { error, status };
+    // return { error, status };
   }
 };
 
@@ -117,8 +117,8 @@ export const apiDelete = async (path: string, params?: ApiParams) => {
     const { data, status } = await axiosApi(obj);
     return { data, status };
   } catch (err: any) {
-    const { error, status } = catchError(err);
-    return { error, status };
+    // const { error, status } = catchError(err);
+    // return { error, status };
   }
 };
 

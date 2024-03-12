@@ -5,7 +5,7 @@ import { useSession } from 'next-auth/react';
 import { useRouter } from 'next/router';
 
 import { DashboardTabs } from '~/components/DashboardTabs';
-import Dashboardcontent from "~/components/Dashboardcontent";
+
 
 
 export default function Home() {
@@ -29,7 +29,6 @@ export default function Home() {
       </Head>
       <main className="m-2">
         <DashboardTabs />
-        <Dashboardcontent />
       </main>
     </>
   );

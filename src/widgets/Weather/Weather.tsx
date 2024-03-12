@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import WeatherInfo from './WeatherInfo';
 import WeatherForecast from './WeatherForecast';
-  // import './Weather.css';
+// import './Weather.css';
 
 import json from './Weather.json';
 import Widget from '../../components/Widget/Widget';
@@ -19,23 +19,23 @@ export default function Weather({ wid }: Props) {
 
   async function search(city: string) {
 
-    let apiUrl = `/api/weather/data?wid=${wid}&city=${city}`;
-    console.log(apiUrl, wid, city, '---------------')
-    const data = await apiGet(apiUrl, {});
-    const info = data?.data;
-    console.log("111",data);
-    if(info)
-    setWeatherdData({
-      ready: true,
-      coordinates: info.coord,
-      temperature: info.main.temp,
-      humidity: info.main.humidity,
-      date: new Date(info.dt * 1000),
-      description: info.weather[0].description,
-      icon: info.weather[0].icon,
-      wind: info.wind.speed,
-      city: info.name
-    });
+    // let apiUrl = `/api/weather/data?wid=${wid}&city=${city}`;
+    // console.log(apiUrl, wid, city, '---------------')
+    // const data = await apiGet(apiUrl, {});
+    // const info = data?.data;
+    // console.log("111",data);
+    // if(info)
+    // setWeatherdData({
+    //   ready: true,
+    //   coordinates: info.coord,
+    //   temperature: info.main.temp,
+    //   humidity: info.main.humidity,
+    //   date: new Date(info.dt * 1000),
+    //   description: info.weather[0].description,
+    //   icon: info.weather[0].icon,
+    //   wind: info.wind.speed,
+    //   city: info.name
+    // });
   }
 
   return (
@@ -56,7 +56,7 @@ export default function Weather({ wid }: Props) {
               <div className="text-center">
                 <WeatherInfo settings={settings} data={weatherData} />
                 <WeatherForecast
-                  settings={settings||''}
+                  settings={settings || ''}
                   days={parseInt(settings?.days ?? '4')}
                   coordinates={weatherData.coordinates}
                 />
