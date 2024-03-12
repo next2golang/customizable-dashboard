@@ -16,6 +16,7 @@
     "@auth/prisma-adapter": "^1.4.0",
     "@heroicons/react": "^2.1.1",
     "@hookform/error-message": "^2.0.1",
+    "@hookform/resolvers": "^3.3.4",
     "@nextui-org/react": "^2.2.10",
     "@prisma/client": "^5.10.2",
     "@radix-ui/react-alert-dialog": "^1.0.5",

@@ -4,7 +4,6 @@ import { ThemeToggle } from '~/components/layout/theme-toggle';
 import { useDisconnect } from 'wagmi';
 import { signOut, useSession } from "next-auth/react";
 import { Button } from '~/components/ui/button';
-import { DashboardTabs } from '~/components/DashboardTabs';
 
 export default function Header() {
     const { disconnect } = useDisconnect();
@@ -20,27 +19,37 @@ export default function Header() {
                     <h1 className="text-lg font-semibold">Trial-Task</h1>
                 </Link>
 
-                <div className='flex-inline absolute left-[200px] mt-[20px] w-full max-w-[800px]'>
-                    {/* <DashboardTabs /> */}
-                </div>
-
                 <div className="flex items-center gap-2">
                     <ThemeToggle />
                     <ConnectButton label={'Connect Wallet'} />
                     {
                         status === 'authenticated'
                         &&
-                        <Button
-                            className=" bg-red-500  text-white"
-                            size="sm"
-                            onClick={() => {
-                                disconnect();
-                                // eslint-disable-next-line @typescript-eslint/no-floating-promises
-                                signOut();
-                            }}
-                        >
-                            Log Out
-                        </Button>
+                        <div className="flex justify-between gap-2">
+                            <Link
+                                href={'/submit'}
+                                className=" hover:underline hover:underline-offset-8 items-center justify-between gap-2 flex"
+                            >
+                                <Button
+                                    className=" bg-green-500  text-white"
+                                    size="sm"
+                                >
+                                    Submit
+                                </Button>
+                            </Link>
+                            <Button
+                                className=" bg-red-500  text-white"
+                                size="sm"
+                                onClick={() => {
+                                    disconnect();
+                                    // eslint-disable-next-line @typescript-eslint/no-floating-promises
+                                    signOut();
+                                }}
+                            >
+                                Log Out
+                            </Button>
+                        </div>
+
                     }
                 </div>
             </nav>

@@ -35,8 +35,6 @@ interface DashboardContentProps {
   RemoveDashboard: () => void;
 }
 export const Dashboardcontent: React.FC<DashboardContentProps> = ({ title, onTitleChange, RemoveDashboard }) => {
-  console.log(title)
-
   const ResponsiveGridLayout = WidthProvider(Responsive);
   const { tabSettings, setTabSettings } = useAppContext();
 

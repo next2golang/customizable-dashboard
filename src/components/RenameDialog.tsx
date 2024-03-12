@@ -29,7 +29,6 @@ export const RenameDialog: React.FC<RenameDialogProps> = ({ title, onTitleChange
 
   const changeTitle = () => {
     onTitleChange(rTitle);
-    console.log(rTitle)
   }
   return (
     <Dialog>

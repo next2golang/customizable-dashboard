@@ -1,7 +1,7 @@
 import React, { useRef, useState } from 'react';
-import { Tabs, Tab } from "@nextui-org/react";
+import { Tabs, Tab } from '@nextui-org/react';
 
-import { Dashboardcontent } from "~/components/Dashboardcontent";
+import { Dashboardcontent } from '~/components/Dashboardcontent';
 
 import {
     AlertDialog,
@@ -63,7 +63,6 @@ export const DashboardTabs = () => {
         setActiveKey(key.toString());
         const title = items.filter((item) => item.key === key.toString())[0]?.title;
         setActiveTitle(title)
-        console.log(items, '--------', key.toString())
     }
 
     const handleChangeTitle = (nTitle: string) => {
@@ -137,7 +136,6 @@ export const DashboardTabs = () => {
                     +
                 </div>
             </div>
-            {activeTitle}
             <Dashboardcontent key={activeKey} title={activeTitle!} onTitleChange={handleChangeTitle} RemoveDashboard={RemoveDashboard} />
         </>
     );
