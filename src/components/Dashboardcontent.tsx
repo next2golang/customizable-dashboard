@@ -32,8 +32,9 @@ import { DeleteDialog } from './DeleteDialog'
 interface DashboardContentProps {
   title: string;
   onTitleChange: (nTitle: string) => void;
+  RemoveDashboard: () => void;
 }
-export const Dashboardcontent: React.FC<DashboardContentProps> = ({ title, onTitleChange }) => {
+export const Dashboardcontent: React.FC<DashboardContentProps> = ({ title, onTitleChange, RemoveDashboard }) => {
   console.log(title)
 
   const ResponsiveGridLayout = WidthProvider(Responsive);
@@ -165,7 +166,7 @@ export const Dashboardcontent: React.FC<DashboardContentProps> = ({ title, onTit
         </span>
 
         <span>
-          <DeleteDialog />
+          <DeleteDialog RemoveDashboard={RemoveDashboard} />
         </span>
       </div>
 
