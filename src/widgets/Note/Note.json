@@ -1,0 +1,86 @@
+{
+  "info": {
+    "wid": "note",
+    "name": "Note",
+    "thumbnail": "",
+    "w": 1,
+    "h": 1
+  },
+  "schema": {
+    "total": {
+      "label": "Number of Notes",
+      "type": "select",
+      "defaultValue": "2",
+      "options": [
+        {
+          "value": "1",
+          "label": "1"
+        },
+        {
+          "value": "2",
+          "label": "2"
+        },
+        {
+          "value": "3",
+          "label": "3"
+        }
+      ]
+    },
+    "title0": {
+      "label": "Note Title 1",
+      "type": "text",
+      "autoFocus": true
+    },
+    "title1": {
+      "label": "Note Title 2",
+      "type": "text"
+    },
+    "title2": {
+      "label": "Note Title 3",
+      "type": "text"
+    },
+    "fontSize": {
+      "label": "Font size",
+      "type": "select",
+      "defaultValue": "14",
+      "options": [
+        {
+          "value": "8",
+          "label": "8"
+        },
+        {
+          "value": "9",
+          "label": "9"
+        },
+        {
+          "value": "10",
+          "label": "10"
+        },
+        {
+          "value": "11",
+          "label": "11"
+        },
+        {
+          "value": "12",
+          "label": "12"
+        },
+        {
+          "value": "13",
+          "label": "13"
+        },
+        {
+          "value": "14",
+          "label": "14"
+        },
+        {
+          "value": "15",
+          "label": "15"
+        },
+        {
+          "value": "16",
+          "label": "16"
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,33 @@
+import json from './Quote.json';
+import Widget from '../../components/Widget/Widget';
+import { useEffect, useState } from 'react';
+import { apiGet } from '../../utils/apiUtils';
+import { FiRefreshCcw } from 'react-icons/fi';
+import _ from 'lodash';
+
+type Props = {
+  wid: string;
+};
+
+type QuoteData = {
+  content: string;
+  author: string;
+};
+
+export default function Quote({ wid }: Props) {
+  const [quoteData, setQuoteData] = useState<QuoteData | null>(null);
+
+  const fetch = async () => {
+    const { data } = await apiGet('https://api.quotable.io/random?tags=famous-quotes', { noCache: true });
+    setQuoteData(data);
+  };
+  const fetchDebounced = _.debounce(fetch, 200);
+
+  useEffect(() => {
+    fetchDebounced();
+  }, []);
+
+  return (
+    <></>
+  );
+}

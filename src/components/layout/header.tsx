@@ -9,7 +9,7 @@ export default function Header() {
     const { disconnect } = useDisconnect();
     const { status } = useSession();
     return (
-        <div className="supports-backdrop-blur:bg-background/60 fixed left-0 right-0 top-0 z-20 border-b bg-background/95 backdrop-blur">
+        <div className="supports-backdrop-blur:bg-background/60 fixed left-0 right-0 top-0 z-20 border-b border-gray-500 bg-background/95 backdrop-blur">
             <nav className="flex h-16 items-center justify-between px-4">
                 <Link
                     href={'/'}
@@ -19,23 +19,37 @@ export default function Header() {
                     <h1 className="text-lg font-semibold">Trial-Task</h1>
                 </Link>
 
-                <div className="flex items-center gap-2 mb-5">
+                <div className="flex items-center gap-2">
                     <ThemeToggle />
                     <ConnectButton label={'Connect Wallet'} />
                     {
                         status === 'authenticated'
                         &&
-                        <Button
-                            className=" bg-red-500  text-white"
-                            size="sm"
-                            onClick={() => {
-                                disconnect();
-                                // eslint-disable-next-line @typescript-eslint/no-floating-promises
-                                signOut();
-                            }}
-                        >
-                            Log Out
-                        </Button>
+                        <div className="flex justify-between gap-2">
+                            <Link
+                                href={'/submit'}
+                                className=" hover:underline hover:underline-offset-8 items-center justify-between gap-2 flex"
+                            >
+                                <Button
+                                    className=" bg-green-500  text-white"
+                                    size="sm"
+                                >
+                                    Submit
+                                </Button>
+                            </Link>
+                            <Button
+                                className=" bg-red-500  text-white"
+                                size="sm"
+                                onClick={() => {
+                                    disconnect();
+                                    // eslint-disable-next-line @typescript-eslint/no-floating-promises
+                                    signOut();
+                                }}
+                            >
+                                Log Out
+                            </Button>
+                        </div>
+
                     }
                 </div>
             </nav>
