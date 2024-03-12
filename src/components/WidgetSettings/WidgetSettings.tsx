@@ -30,10 +30,10 @@ export default function WidgetSettings({ wid, schema, onSubmit, onCancel }: Prop
   const publish = usePub();
 
   const onFormSubmit = async (formData: any) => {
-    const { data, error } = await saveSettings(formData);
-    if (!error) {
-      onSubmit(data.settings);
-    }
+    // const { data, error } = await saveSettings(formData);
+    // if (!error) {
+    //   onSubmit(data.settings);
+    // }
   };
 
   const handleInputChange = (event: any) => {
@@ -122,8 +122,8 @@ export default function WidgetSettings({ wid, schema, onSubmit, onCancel }: Prop
                 // ref={register(key)}
                 name={key}
                 onChange={(ev) => setValue(key, ev.target.checked)}
-                // value={values[key]}
-                // defaultValue={settings?.key}
+              // value={values[key]}
+              // defaultValue={settings?.key}
               />
               <span className="ml-2">{field.label}</span>
             </label>
