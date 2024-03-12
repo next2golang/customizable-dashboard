@@ -7,7 +7,6 @@ import { apiGet } from '../../utils/apiUtils';
 import { KeyValueString } from '../../../types';
 import { WidgetHeight, WidgetWidth } from '../../utils/constants';
 
-
 const CustomTooltip = ({ active, payload, label }: any) => {
   if (active && payload && payload.length) {
     return (

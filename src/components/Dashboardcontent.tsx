@@ -146,6 +146,22 @@ export default function Dashboardcontent() {
 
   return (
     <>
+      <div className="flex mt-5 items-center ">
+        <span className="ml-5 mr-5">
+          <Button className="btn mt-4 ml-4 mb-4 dark:text-black" onClick={() => setAddmodalShowed(true)}>
+            Add Widget
+          </Button>
+        </span>
+
+        <span className="mr-5">
+          <RenameDialog />
+        </span>
+
+        <span>
+          <DeleteDialog />
+        </span>
+      </div>
+
       <ResponsiveGridLayout
         draggableHandle=".draggableHandle"
         className="layout"
@@ -273,20 +289,6 @@ export default function Dashboardcontent() {
             }
           })}
       </ResponsiveGridLayout>
-
-      <span className="ml-5 mr-5">
-        <Button className="btn mt-4 ml-4 mb-4 dark:text-black" onClick={() => setAddmodalShowed(true)}>
-          Add Widget
-        </Button>
-      </span>
-
-      <span className="mr-5">
-        <RenameDialog />
-      </span>
-
-      <span>
-        <DeleteDialog />
-      </span>
 
       {
         addmodalShowed &&
