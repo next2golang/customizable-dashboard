@@ -45,41 +45,47 @@ export const DashboardTabs = () => {
     }
 
     return (
-        <div className="flex w-full flex-col-2 mt-2">
-            <Tabs
-                aria-label="Options"
-                color="default"
-                variant="underlined"
-                selectedKey={activeKey}
-                onSelectionChange={onChange}
-                classNames={{
-                    tabList: "w-full gap-1 relative rounded-none p-0 border-b border-blue-600 ",
-                    cursor: "w-full  bg-white",
-                    tab: "w-[130px] h-10 border-r border-l border-t border-blue-600",
-                    tabContent: "group-data-[selected=true]:text-blue-400"
-                }}
-            >
-                {items.map((item) => (
-                    <Tab
-                        key={item.key}
-                        title={
-                            <div className="flex items-center justify-between">
-                                <span>{item.title}</span>
-                                <span
-                                    className="text-[20px] ml-2 text-gray-400 hover:text-blue-500 hover: cursor-default "
-                                    onClick={() => remove(item.key)}>
-                                    &#215;
-                                </span>
-                            </div>
-                        }></Tab>
-                ))}
-            </Tabs>
-            <div
-                className="flex items-center text-[30px] text-white ml-2 hover:text-gray-500 hover: cursor-pointer"
-                onClick={add}
-            >
-                +
+        <>
+            <div className="flex relative w-full flex-col-2">
+                <Tabs
+                    aria-label="Options"
+                    color="default"
+                    variant="underlined"
+                    selectedKey={activeKey}
+                    onSelectionChange={onChange}
+                    classNames={{
+                        tabList: "w-full gap-1 p-0 border-b border-blue-600 ",
+                        cursor: "w-full  bg-white",
+                        tab: " w-[130px] h-10 border-r border-l border-t border-blue-600",
+                        tabContent: "group-data-[selected=true]:text-green-500"
+                    }}
+                >
+                    {items.map((item) => (
+                        <Tab
+                            key={item.key}
+                            title={
+                                <div className="flex items-center justify-between">
+                                    <span>{item.title}</span>
+                                    <span
+                                        className="text-[20px] ml-2 text-gray-400 hover:text-blue-500 hover: cursor-default "
+                                        onClick={() => remove(item.key)}>
+                                        &#215;
+                                    </span>
+                                </div>
+
+                            }
+                        >
+
+                        </Tab>
+                    ))}
+                </Tabs>
+                <div
+                    className="flex items-center text-[30px] text-white ml-2 hover:text-gray-500 hover: cursor-pointer"
+                    onClick={add}
+                >
+                    +
+                </div>
             </div>
-        </div>
+        </>
     );
 }
