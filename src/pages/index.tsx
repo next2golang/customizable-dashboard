@@ -4,7 +4,7 @@ import * as React from 'react'
 import { useSession } from 'next-auth/react';
 import { useRouter } from 'next/router';
 
-import { DashboardTab } from '~/components/tabs';
+import { DashboardTabs } from '~/components/DashboardTabs';
 
 export default function Home() {
   const router = useRouter();
@@ -25,7 +25,7 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main className="ml-2 mt-2">
-        {/* <DashboardTab /> */}
+        <DashboardTabs />
       </main>
 
 
