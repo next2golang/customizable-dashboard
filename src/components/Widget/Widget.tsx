@@ -42,10 +42,10 @@ export default function Widget({ wid, schema, w, h, cn, render, onSettings }: Pr
     if (stop === true) {
       setIsMoving(() => false);
     } else {
-      // const newState = !isMoving;
-      // console.log('newState', isMoving, newState);
-      // setIsMoving(newState);
-      // publish(PubSubEvent.MovingToast, { isMoving: newState });
+      const newState = !isMoving;
+      console.log('newState', isMoving, newState);
+      setIsMoving(newState);
+      publish(PubSubEvent.MovingToast, { isMoving: newState });
       setIsMoving((isCurrentlyMoving) => {
         const newState = !isCurrentlyMoving;
         publish(PubSubEvent.MovingToast, { isMoving: newState });

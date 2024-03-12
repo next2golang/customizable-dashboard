@@ -8,6 +8,20 @@ type Props = {
 
 export default function Toggl({ wid }: Props) {
   return (
-    <></>
+    <Widget
+      wid={wid}
+      schema={json.schema}
+      w={json.info.w}
+      h={json.info.h}
+      cn=""
+      onSettings={() => { }}
+      render={() => {
+        return (
+          <div className="p-2">
+            Toggle
+          </div>
+        );
+      }}
+    />
   );
 }

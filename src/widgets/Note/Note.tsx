@@ -44,6 +44,28 @@ export default function Note({ wid }: Props) {
   };
 
   return (
-    <></>
+    <Widget
+      wid={wid}
+      schema={json.schema}
+      w={json.info.w}
+      h={json.info.h}
+      cn="overflow-hidden rounded-md"
+      onSettings={({ settings, isSubmitted }) => {
+        if (isSubmitted) {
+          setSettings(settings);
+          setText(settings[`text0`]!);
+          setSkipSaving(true);
+          setNoteIndex(0);
+        }
+      }}
+      render={() => {
+        const arrNotes = Array(parseInt(settings?.total ?? '2')).fill(0);
+        return (
+          <div className="p-2">
+            Note
+          </div>
+        );
+      }}
+    />
   );
 }

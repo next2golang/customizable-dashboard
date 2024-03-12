@@ -20,6 +20,7 @@ export default function AnalogClock({ wid }: Props) {
       render={({ settings }) => {
         return (
           <div className="p-2 flex">
+            Analog Clock
           </div>
         );
       }}

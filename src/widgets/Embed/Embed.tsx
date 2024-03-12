@@ -31,6 +31,18 @@ export default function Embed({ wid }: Props) {
   });
 
   return (
-    <></>
+    <Widget
+      wid={wid}
+      schema={json.schema}
+      w={json.info.w}
+      h={json.info.h}
+      cn="rounded-md"
+      onSettings={({ settings }) => {
+        setCurrentUrl(settings?.url ?? '');
+      }}
+      render={() => {
+        return <IFrame />;
+      }}
+    />
   );
 }

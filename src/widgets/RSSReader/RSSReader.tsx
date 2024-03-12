@@ -45,6 +45,21 @@ export default function RSSReader({ wid }: Props) {
   }, [url]);
 
   return (
-    <></>
+    <Widget
+      wid={wid}
+      schema={json.schema}
+      w={json.info.w}
+      h={json.info.h}
+      cn="overflow-hidden"
+      onSettings={({ settings }) => {
+      }}
+      render={({ settings }) => {
+        return (
+          <div className="p-2">
+            RSS Reader
+          </div>
+        );
+      }}
+    />
   );
 }
