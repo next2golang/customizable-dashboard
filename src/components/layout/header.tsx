@@ -4,6 +4,7 @@ import { ThemeToggle } from '~/components/layout/theme-toggle';
 import { useDisconnect } from 'wagmi';
 import { signOut, useSession } from "next-auth/react";
 import { Button } from '~/components/ui/button';
+import { DashboardTabs } from '~/components/DashboardTabs';
 
 export default function Header() {
     const { disconnect } = useDisconnect();
@@ -20,6 +21,7 @@ export default function Header() {
                 </Link>
 
                 <div className='flex-inline absolute left-[200px] mt-[42px] max-w-0 sm:max-w-0 md:max-w-[200px] lg:max-w-[350px] xl:max-w-[550px] 2xl:max-w-[55rem]'>
+                    <DashboardTabs />
                 </div>
 
                 <div className="flex items-center gap-2">
