@@ -1,0 +1,25 @@
+{
+  "info": {
+    "wid": "toggl",
+    "name": "Toggl",
+    "thumbnail": "",
+    "w": 1,
+    "h": 2
+  },
+  "schema": {
+    "apiKey": {
+      "label": "API Key",
+      "type": "text",
+      "autoFocus": true,
+      "className": "w-full",
+      "validation": {
+        "required": "API Key is required",
+        "minLength": {
+          "value": 1,
+          "message": "API Key should have at least 1 character"
+        }
+      }
+    }
+  }
+
+}

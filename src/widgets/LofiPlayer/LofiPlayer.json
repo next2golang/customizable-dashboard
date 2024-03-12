@@ -1,0 +1,19 @@
+{
+  "info": {
+    "wid": "lofi",
+    "name": "Lofi Music",
+    "thumbnail": "/thumbnail-lofi.png",
+    "w": 1,
+    "h": 1
+  },
+  "schema": {
+    "urls": {
+      "label": "URLs",
+      "type": "textarea",
+      "autoFocus": true,
+      "validation": {
+        "required": "URL is required"
+      }
+    }
+  }
+}
