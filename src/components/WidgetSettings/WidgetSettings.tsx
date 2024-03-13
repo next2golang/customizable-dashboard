@@ -175,7 +175,6 @@ export function MoverIcon() {
         // don't use onClick as some users try to 'drag' this icon instead of clicking on it
         publish(PubSubEvent.Moving, { stop: false });
       }}
-
     >
       <RiDragMove2Fill className="mb-2" />
     </span>

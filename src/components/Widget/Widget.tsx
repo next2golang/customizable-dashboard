@@ -63,16 +63,20 @@ export default function Widget({ wid, schema, w, h, cn, render, onSettings }: Pr
       className={`relative overflow-hidden bg-[#11141d] rounded-lg widget-shadow shadow-lg shadow-blue-500/50 ${borderCss} ${cn ?? ''}`}
       style={{ width: WidgetWidth * w, height: hToPx(h) }}
     >
-      <div
-        className="flex z-999 gap-2  absolute right-0 items-center bg-blue-600 text-gray-300"
-      >
-        <SettingsIcon wid={wid} onClick={toggleSettings} />
-        <span
-          className="text-[25px] mr-2 hover: cursor-pointer hover:text-white"
-          onClick={() => {
-            publish(PubSubEvent.Delete, wid);
-          }}>&#215;</span>
-      </div>
+      {!isMoving ? (
+        <div
+          className="flex z-999 gap-2  absolute right-0 items-center bg-blue-600 text-gray-300"
+        >
+          <SettingsIcon wid={wid} onClick={toggleSettings} />
+          <span
+            className="text-[25px] mr-2 hover: cursor-pointer hover:text-white"
+            onClick={() => {
+              publish(PubSubEvent.Delete, wid);
+            }}>&#215;</span>
+        </div>
+      ) : (
+        <div></div>
+      )}
 
       {settingsShowed ? (
         <WidgetSettings

@@ -17,12 +17,13 @@ export default function Embed({ wid }: Props) {
       <iframe
         width={WidgetWidth}
         height={hToPx(json.info.h)}
-        src={currentUrl}
-        {...(currentUrl
-          ? {}
-          : {
-            srcDoc: `<html><style>body { color: teal } </style><body><p>This is an Embed Widget</p><p>To show a web page (news, forum posts, etc.), click on the "Settings" icon of this widget, enter the URL of the web page you want to embed.</p></html>`
-          })}
+        src={
+          currentUrl}
+        {...(currentUrl ? {
+        } : {
+          srcDoc: `<html><style>body { color: teal } </style><body><p>This is an Embed Widget</p><p>To show a web page (news, forum posts, etc.), click on the "Settings" icon of this widget, enter the URL of the web page you want to embed.</p></html>`
+        })
+        }
         className="bg-black rounded-md"
       >
         aa

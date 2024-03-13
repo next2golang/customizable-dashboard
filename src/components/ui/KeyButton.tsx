@@ -1,4 +1,4 @@
-import { PiLockKeyFill, PiLockKeyOpenFill } from "react-icons/pi";
+import { PiLockKeyFill, PiLockKeyOpenFill } from 'react-icons/pi';
 import { useState } from 'react';
 
 import { PubSubEvent, usePub } from '~/hooks/usePubSub';
@@ -15,9 +15,13 @@ export const KeyButton = () => {
             }
         >
             {
-                !switchtoggle ? <PiLockKeyFill className="w-5 h-5" />
-                    : <PiLockKeyOpenFill className="w-5 h-5" />
-            } Layout
+                !switchtoggle ? (
+                    <PiLockKeyFill className="w-5 h-5" />
+                ) : (
+                    <PiLockKeyOpenFill className="w-5 h-5" />
+                )
+            }
+            Layout
         </button>
     )
 }

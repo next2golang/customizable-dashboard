@@ -22,7 +22,9 @@ export default function AddWidgetModal({ onConfirm, onCancel }: Props) {
       bodyClassName="!max-w-[80%]"
       content={
         <div>
-          <h3 className="text-black">Select a Widget</h3>
+          <h3 className="text-black">
+            Select a Widget
+          </h3>
           <ul className="flex flex-wrap mt-2 gap-4 max-h-[400px] overflow-y-scroll">
             {widgetList.map((widget) => {
               // console.log('widget', widget);

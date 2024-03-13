@@ -152,6 +152,7 @@ const Dashboardcontent: React.FC<DashboardContentProps> = ({ title, onTitleChang
       });
     }
   };
+
   return (
     <>
       <div className="flex mt-5 items-center ">

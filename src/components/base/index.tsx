@@ -381,19 +381,23 @@ export const Field = ({
   }
   return (
     <label className={`block mt-2 ${className}`}>
-      {label && <span>{label}</span>}
-      {children ? (
-        <div className={fieldClassName}>{children}</div>
-      ) : (
-        <input
-          type={type}
-          className={`form-input mt-1 block w-full p-2 border rounded-md border-gray-300 ${fieldClassName}`}
-          placeholder={placeholder}
-          defaultValue={defaultValue}
-          {...valueProp}
-          {...others}
-        />
-      )}
+      {
+        label &&
+        <span>{label}</span>
+      }
+      {
+        children ? (
+          <div className={fieldClassName}>{children}</div>
+        ) : (
+          <input
+            type={type}
+            className={`form-input mt-1 block w-full p-2 border rounded-md border-gray-300 ${fieldClassName}`}
+            placeholder={placeholder}
+            defaultValue={defaultValue}
+            {...valueProp}
+            {...others}
+          />
+        )}
     </label>
   );
 };

@@ -1,12 +1,8 @@
-/* eslint-disable @typescript-eslint/no-unsafe-member-access */
-/* eslint-disable @typescript-eslint/no-unsafe-assignment */
-/* eslint-disable @typescript-eslint/no-unsafe-argument */
 import * as React from 'react'
 import { useEffect } from 'react'
 import { ethers } from 'ethers';
 import { signIn, useSession } from 'next-auth/react';
 import { useAccount } from 'wagmi'
-
 
 import {
     Card,

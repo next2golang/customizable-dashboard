@@ -13,7 +13,7 @@ import {
     AlertDialogHeader,
     AlertDialogTitle,
     AlertDialogTrigger,
-} from "~/components/ui/alert-dialog"
+} from '~/components/ui/alert-dialog'
 
 const initialItems = [
     { title: 'Dashboard 1', children: '', key: '1' },
@@ -24,6 +24,7 @@ export const DashboardTabs = () => {
     const [activeKey, setActiveKey] = useState(initialItems[0]?.key);
     const [activeTitle, setActiveTitle] = useState(initialItems[0]?.title);
     const [items, setItems] = useState(initialItems);
+
     const newTabIndex = useRef(2);
 
     const add = () => {
@@ -74,6 +75,7 @@ export const DashboardTabs = () => {
     const RemoveDashboard = () => {
         remove(activeKey!);
     }
+
     return (
         <>
             <div className="flex relative w-full flex-col-2 border-b border-gray-600" >
