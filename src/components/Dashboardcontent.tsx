@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, memo } from 'react';
 import { WidthProvider, Responsive, type Layouts, type Layout } from 'react-grid-layout';
 
 import StockChart from '~/widgets/StockChart/StockChart';
@@ -25,16 +25,19 @@ import { saveTabDB, saveTabLS } from '../lib/MainPageUtils';
 import { type UserWidget, type Widget } from '../../types';
 import { Toast } from '~/components/base';
 import { Button } from '~/components/base';
+import { KeyButton } from '~/components/ui/KeyButton';
 import AddWidgetModal from '~/components/base/AddWidgetModal/AddWidgetModal';
 import { RenameDialog } from './RenameDialog'
 import { DeleteDialog } from './DeleteDialog'
+
+import { PiLockKeyFill, PiLockKeyOpenFill } from "react-icons/pi";
 
 interface DashboardContentProps {
   title: string;
   onTitleChange: (nTitle: string) => void;
   RemoveDashboard: () => void;
 }
-export const Dashboardcontent: React.FC<DashboardContentProps> = ({ title, onTitleChange, RemoveDashboard }) => {
+const Dashboardcontent: React.FC<DashboardContentProps> = ({ title, onTitleChange, RemoveDashboard }) => {
   const ResponsiveGridLayout = WidthProvider(Responsive);
   const { tabSettings, setTabSettings } = useAppContext();
 
@@ -60,6 +63,7 @@ export const Dashboardcontent: React.FC<DashboardContentProps> = ({ title, onTit
     xs: getLSLayout('xs'),
     xxs: getLSLayout('xxs')
   });
+
   const publish = usePub();
 
   useEffect(() => {
@@ -149,7 +153,6 @@ export const Dashboardcontent: React.FC<DashboardContentProps> = ({ title, onTit
     }
   };
 
-  console.log(userWidgets)
   return (
     <>
       <div className="flex mt-5 items-center ">
@@ -165,6 +168,10 @@ export const Dashboardcontent: React.FC<DashboardContentProps> = ({ title, onTit
 
         <span>
           <DeleteDialog RemoveDashboard={RemoveDashboard} />
+        </span>
+
+        <span className="absolute right-0 mr-5 -mt-2">
+          <KeyButton />
         </span>
       </div>
 
@@ -359,3 +366,5 @@ export const Dashboardcontent: React.FC<DashboardContentProps> = ({ title, onTit
     </>
   );
 }
+
+export default memo(Dashboardcontent);

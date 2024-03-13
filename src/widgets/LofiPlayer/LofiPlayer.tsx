@@ -48,13 +48,15 @@ export default function LofiPlayer({ wid }: Props) {
       schema={json.schema}
       w={json.info.w}
       h={json.info.h}
-      cn="text-center"
+      cn=""
       onSettings={({ settings }) => {
         setCurrentUrl(settings?.url ?? '');
       }}
       render={() => {
         return (
-          <></>
+          <div className="p-2">
+            Lofi Player
+          </div>
         );
       }}
     />

@@ -51,18 +51,9 @@ export default function Weather({ wid }: Props) {
       render={({ settings }) => {
         // console.log('settings', settings);
         return (
-          <>
-            {weatherData.ready && (
-              <div className="text-center">
-                <WeatherInfo settings={settings} data={weatherData} />
-                <WeatherForecast
-                  settings={settings || ''}
-                  days={parseInt(settings?.days ?? '4')}
-                  coordinates={weatherData.coordinates}
-                />
-              </div>
-            )}
-          </>
+          <div className="p-2">
+            Weather
+          </div>
         );
       }}
     />

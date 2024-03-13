@@ -28,6 +28,20 @@ export default function Quote({ wid }: Props) {
   }, []);
 
   return (
-    <></>
+    <Widget
+      wid={wid}
+      schema={json.schema}
+      w={json.info.w}
+      h={json.info.h}
+      cn="overflow-hidden"
+      onSettings={({ }) => { }}
+      render={({ settings }) => {
+        return (
+          <div className="p-2">
+            Quote
+          </div>
+        );
+      }}
+    />
   );
 }

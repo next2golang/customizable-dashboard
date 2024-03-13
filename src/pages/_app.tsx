@@ -9,8 +9,6 @@ import {
   getDefaultWallets,
   Locale,
   getDefaultConfig,
-  createAuthenticationAdapter,
-  RainbowKitAuthenticationProvider,
 } from '@rainbow-me/rainbowkit';
 
 import {
@@ -18,6 +16,7 @@ import {
   trustWallet,
   ledgerWallet,
 } from '@rainbow-me/rainbowkit/wallets';
+
 import { WagmiProvider } from 'wagmi';
 import {
   arbitrum,
@@ -28,11 +27,14 @@ import {
   sepolia,
   zora,
 } from 'wagmi/chains';
+
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 
 import { Layout } from '~/components/layout';
 
 import '~/styles/globals.css';
+import '~/styles/react-grid-layout.css';
+import '~/styles/react-resizable.css';
 import '@rainbow-me/rainbowkit/styles.css';
 
 const { wallets } = getDefaultWallets();
@@ -66,9 +68,7 @@ const MyApp: AppType<{ session: Session | null }> = ({
   pageProps: { session, ...pageProps },
 }: AppProps) => {
   const { locale } = useRouter() as { locale: Locale };
-  // const { status } = useSession();
   return (
-    // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
     <SessionProvider session={session}>
       <WagmiProvider config={config}>
         <QueryClientProvider client={queryClient}>

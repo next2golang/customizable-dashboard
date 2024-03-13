@@ -171,9 +171,9 @@ export function MoverIcon() {
   return (
     <span
       className="fixed left-[362px] bottom-6 cursor-pointer z-10 opacity-60 hover:opacity-100 text-gray-500"
-      onMouseDown={() => {
+      onClick={() => {
         // don't use onClick as some users try to 'drag' this icon instead of clicking on it
-        publish(PubSubEvent.Moving, {});
+        publish(PubSubEvent.Moving, { stop: false });
       }}
     >
       <RiDragMove2Fill className="mb-2" />
@@ -185,14 +185,12 @@ export function SettingsIcon({ wid, onClick }: { wid: string; onClick: () => voi
   return (
     <>
       <span
-        className="fixed left-[362px] bottom-2 cursor-pointer z-10 opacity-60 hover:opacity-100 text-gray-500"
+        className=" ml-2 bottom-2 cursor-pointer z-10 opacity-60 hover:opacity-100 text-white"
         data-tooltip-id="setting-tutorial-tooltip"
         data-tooltip-place="right"
       >
-        <AiOutlineSetting width={32} height={32} onClick={onClick} />
+        <AiOutlineSetting width={20} height={20} onClick={onClick} />
       </span>
-
-      {wid.startsWith('weather') && <WidgetSettingsTutorial />}
     </>
   );
 }

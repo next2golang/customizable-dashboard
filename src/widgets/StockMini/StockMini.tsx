@@ -25,6 +25,22 @@ export default function StockMini({ wid, symbol }: Props) {
   });
 
   return (
-    <></>
+    <Widget
+      wid={wid}
+      schema={json.schema}
+      w={json.info.w}
+      h={json.info.h}
+      cn="overflow-hidden"
+      onSettings={({ settings }) => {
+        setCurrentSymbol(settings?.symbol ?? symbol); // default to symbol prop if no settings
+      }}
+      render={() => {
+        return (
+          <div className="p-2">
+            Stock Mini
+          </div>
+        );
+      }}
+    />
   );
 }
