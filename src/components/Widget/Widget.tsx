@@ -1,7 +1,7 @@
 import { ReactNode, useEffect, useState } from 'react';
 import { useWidgetSettings } from '../../hooks/useWidgetSettings';
 // import schema from './AirQuality.json';
-import WidgetSettings, { MoverIcon, SettingsIcon } from '../../components/WidgetSettings/WidgetSettings';
+import WidgetSettings, { SettingsIcon } from '../../components/WidgetSettings/WidgetSettings';
 import { KeyValueString } from '../../../types';
 import { WidgetWidth } from '../../utils/constants';
 import { hToPx, widToName } from '../../utils/appUtils';
@@ -27,11 +27,10 @@ type Props = {
 
 export default function Widget({ wid, schema, w, h, cn, render, onSettings }: Props) {
   const { tabSettings } = useAppContext();
-  // let tabSettings;
-  const [moverShowed, setMoverShowed] = useState(false);
-  const [timer, setTimer] = useState(0);
+
   const [isMoving, setIsMoving] = useState(false);
   const [settings, setSettings] = useState<KeyValueString>({});
+
   const { settingsShowed, saveSettings, toggleSettings } = useWidgetSettings(wid, (settings) => {
     setSettings(settings);
     onSettings({ settings, isSubmitted: false });
@@ -39,43 +38,33 @@ export default function Widget({ wid, schema, w, h, cn, render, onSettings }: Pr
   const publish = usePub();
 
   useSub(PubSubEvent.Moving, ({ stop }: { stop: boolean }) => {
-    if (stop === true) {
-      setIsMoving(() => false);
-    } else {
-      const newState = !isMoving;
-      console.log('newState', isMoving, newState);
-      setIsMoving(newState);
-      publish(PubSubEvent.MovingToast, { isMoving: newState });
-      setIsMoving((isCurrentlyMoving) => {
-        const newState = !isCurrentlyMoving;
-        publish(PubSubEvent.MovingToast, { isMoving: newState });
-        return newState;
-      });
-    }
-  });
-  const movingCss = `border-[2px] border-yellow-700 draggableHandle cursor-move`;
-  const borderCss = `${isMoving ? movingCss : `border-[1px] border-gray-50 ${tabSettings?.border ?? ''} ${tabSettings?.borderColor ?? ''}`
-    }`;
+    // if (stop === true) {
+    //   setIsMoving(() => false);
+    // } else {
 
+    //   setIsMoving((curretMoving) => {
+    //     const newState = !curretMoving;
+    //     // publish(PubSubEvent.MovingToast, { isMoving: newState });
+    //     // alert(newState)
+    //     return newState;
+    //   });
+
+    // }
+    //if (stop == false) setIsMoving(true);
+    setIsMoving(!isMoving);
+  });
+
+  const movingCss = `border-[2px] border-blue-600 draggableHandle cursor-move`;
+  const borderCss = `${isMoving ? movingCss : `border-[1px] border-[#222839] shadow-blue-500/50 ${tabSettings?.border ?? ''} ${tabSettings?.borderColor ?? ''}`}`;
+
+  console.log(borderCss)
   return (
     <div
       // border-2 border-gray-100 rounded-md
-      className={`relative overflow-hidden overflow-y-scroll ${borderCss} ${cn ?? ''}`}
+      className={`relative overflow-hidden bg-[#11141d] widget-shadow shadow-lg shadow-blue-500/50 ${borderCss} ${cn ?? ''}`}
       style={{ width: WidgetWidth * w, height: hToPx(h) }}
     >
-      <div
-        onMouseOver={() => {
-          setMoverShowed(true);
-          if (timer) {
-            clearTimeout(timer);
-          }
-          setTimeout(() => setMoverShowed(false), 3000);
-        }}
-      >
-        {moverShowed && <MoverIcon />}
-        <SettingsIcon wid={wid} onClick={toggleSettings} />
-      </div>
-
+      <SettingsIcon wid={wid} onClick={toggleSettings} />
       {settingsShowed ? (
         <WidgetSettings
           wid={wid}

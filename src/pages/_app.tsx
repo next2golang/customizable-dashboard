@@ -3,6 +3,8 @@ import type { Session } from "next-auth";
 import { ThemeProvider } from 'next-themes';
 import { SessionProvider } from "next-auth/react";
 import { useRouter } from 'next/router';
+import { AuthProvider } from '~/hooks/useAppContext';
+
 
 import {
   RainbowKitProvider,
@@ -33,6 +35,8 @@ import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { Layout } from '~/components/layout';
 
 import '~/styles/globals.css';
+import '~/styles/react-grid-layout.css';
+import '~/styles/react-resizable.css';
 import '@rainbow-me/rainbowkit/styles.css';
 
 const { wallets } = getDefaultWallets();

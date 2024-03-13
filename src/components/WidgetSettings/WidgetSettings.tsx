@@ -167,14 +167,18 @@ export default function WidgetSettings({ wid, schema, onSubmit, onCancel }: Prop
 }
 
 export function MoverIcon() {
+  const test = () => {
+    console.log("----------------------------");
+  }
   const publish = usePub();
   return (
     <span
       className="fixed left-[362px] bottom-6 cursor-pointer z-10 opacity-60 hover:opacity-100 text-gray-500"
-      onMouseDown={() => {
+      onClick={() => {
         // don't use onClick as some users try to 'drag' this icon instead of clicking on it
-        publish(PubSubEvent.Moving, {});
+        publish(PubSubEvent.Moving, { stop: false });
       }}
+
     >
       <RiDragMove2Fill className="mb-2" />
     </span>

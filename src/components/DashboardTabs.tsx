@@ -1,7 +1,7 @@
 import React, { useRef, useState } from 'react';
 import { Tabs, Tab } from '@nextui-org/react';
 
-import { Dashboardcontent } from '~/components/Dashboardcontent';
+import Dashboardcontent from '~/components/Dashboardcontent';
 
 import {
     AlertDialog,
@@ -76,18 +76,19 @@ export const DashboardTabs = () => {
     }
     return (
         <>
-            <div className="flex relative w-full flex-col-2">
+            <div className="flex relative w-full flex-col-2 border-b border-gray-600" >
                 <Tabs
                     aria-label="Options"
                     color="default"
-                    variant="underlined"
+                    variant="light"
+                    radius="lg"
                     selectedKey={activeKey}
                     onSelectionChange={onChange}
                     classNames={{
-                        tabList: "w-full gap-1 p-0 border-b border-blue-600 ",
-                        cursor: "w-full  bg-white",
-                        tab: " w-[130px] h-10 border-r border-l border-t border-blue-600",
-                        tabContent: "group-data-[selected=true]:text-green-500"
+                        tabList: "w-full gap-1 p-0",
+                        cursor: "w-full  bg-gradient-to-r from-blue-500 via-blue-600 to-blue-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-blue-300 rounded-t-lg",
+                        tab: "  w-[130px] h-10 border-r border-l border-t border-gray-600 rounded-t-lg",
+                        tabContent: "group-data-[selected=true]:mb-2"
                     }}
                 >
                     {items.map((item) => (

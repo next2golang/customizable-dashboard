@@ -20,9 +20,10 @@ export const useSub = (event: string, callback: any) => {
   useEffect(() => {
     emitter.on(event, callback);
     return unsubscribe;
-  }, []);
+  });
 
-  return unsubscribe;
+  //return unsubscribe;
+  return null;
 };
 
 export const usePub = () => {
