@@ -15,7 +15,7 @@ export const KeyButton = () => {
             }
         >
             {
-                switchtoggle ? <PiLockKeyFill className="w-5 h-5" />
+                !switchtoggle ? <PiLockKeyFill className="w-5 h-5" />
                     : <PiLockKeyOpenFill className="w-5 h-5" />
             } Layout
         </button>
