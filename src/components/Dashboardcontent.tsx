@@ -224,7 +224,6 @@ const Dashboardcontent: React.FC<DashboardContentProps> = ({ title, onTitleChang
           userWidgets.map((widget: UserWidget, idx: number) => {
             const wid = widget?.wid ?? '';
             const type = wid.split('-')[0];
-            console.log(type)
             const cn = ``;
             switch (type) {
               case 'weather':

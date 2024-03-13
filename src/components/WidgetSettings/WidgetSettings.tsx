@@ -167,9 +167,6 @@ export default function WidgetSettings({ wid, schema, onSubmit, onCancel }: Prop
 }
 
 export function MoverIcon() {
-  const test = () => {
-    console.log("----------------------------");
-  }
   const publish = usePub();
   return (
     <span
@@ -189,11 +186,11 @@ export function SettingsIcon({ wid, onClick }: { wid: string; onClick: () => voi
   return (
     <>
       <span
-        className="fixed left-[362px] bottom-2 cursor-pointer z-10 opacity-60 hover:opacity-100 text-gray-500"
+        className=" ml-2 bottom-2 cursor-pointer z-10 opacity-60 hover:opacity-100 text-white"
         data-tooltip-id="setting-tutorial-tooltip"
         data-tooltip-place="right"
       >
-        <AiOutlineSetting width={32} height={32} onClick={onClick} />
+        <AiOutlineSetting width={20} height={20} onClick={onClick} />
       </span>
     </>
   );

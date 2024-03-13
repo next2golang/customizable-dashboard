@@ -57,14 +57,23 @@ export default function Widget({ wid, schema, w, h, cn, render, onSettings }: Pr
   const movingCss = `border-[2px] border-blue-600 draggableHandle cursor-move`;
   const borderCss = `${isMoving ? movingCss : `border-[1px] border-[#222839] shadow-blue-500/50 ${tabSettings?.border ?? ''} ${tabSettings?.borderColor ?? ''}`}`;
 
-  console.log(borderCss)
   return (
     <div
       // border-2 border-gray-100 rounded-md
-      className={`relative overflow-hidden bg-[#11141d] widget-shadow shadow-lg shadow-blue-500/50 ${borderCss} ${cn ?? ''}`}
+      className={`relative overflow-hidden bg-[#11141d] rounded-lg widget-shadow shadow-lg shadow-blue-500/50 ${borderCss} ${cn ?? ''}`}
       style={{ width: WidgetWidth * w, height: hToPx(h) }}
     >
-      <SettingsIcon wid={wid} onClick={toggleSettings} />
+      <div
+        className="flex z-999 gap-2  absolute right-0 items-center bg-blue-600 text-gray-300"
+      >
+        <SettingsIcon wid={wid} onClick={toggleSettings} />
+        <span
+          className="text-[25px] mr-2 hover: cursor-pointer hover:text-white"
+          onClick={() => {
+            publish(PubSubEvent.Delete, wid);
+          }}>&#215;</span>
+      </div>
+
       {settingsShowed ? (
         <WidgetSettings
           wid={wid}
