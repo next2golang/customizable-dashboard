@@ -14,6 +14,7 @@
   },
   "dependencies": {
     "@auth/prisma-adapter": "^1.4.0",
+    "@headlessui/react": "^1.7.18",
     "@heroicons/react": "^2.1.1",
     "@hookform/error-message": "^2.0.1",
     "@hookform/resolvers": "^3.3.4",

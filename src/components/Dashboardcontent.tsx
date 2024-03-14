@@ -13,6 +13,7 @@ import RSSReader from '~/widgets/RSSReader/RSSReader';
 import Quote from '~/widgets/Quote/Quote';
 import AnalogClock from '~/widgets/AnalogClock/AnalogClock';
 import Cryptoportfoliotracker from '~/widgets/CryptoportfolioTracker/cryptoportfoliotracker';
+import Cryptopriceticker from '~/widgets/CryptoPriceTicker/cryptopriceticker';
 import { isDoubleHeightWidget } from '~/widgets';
 
 
@@ -155,13 +156,13 @@ const Dashboardcontent: React.FC<DashboardContentProps> = ({ title, onTitleChang
   };
 
   return (
-    <>
-      <div className="flex mt-5 items-center ">
-        <span className="ml-5 mr-5">
+    <div className="overflow-y-auto">
+      <div className="flex mt-5 items-center">
+        < span className="ml-5 mr-5" >
           <Button className="btn mt-4 ml-4 mb-4 dark:text-black" onClick={() => setAddmodalShowed(true)}>
             Add Widget
           </Button>
-        </span>
+        </span >
 
         <span className="mr-5">
           <RenameDialog title={title} onTitleChange={onTitleChange} />
@@ -171,10 +172,10 @@ const Dashboardcontent: React.FC<DashboardContentProps> = ({ title, onTitleChang
           <DeleteDialog RemoveDashboard={RemoveDashboard} />
         </span>
 
-        <span className="absolute right-0 mr-5 -mt-2">
+        <span className="absolute right-0 mr-5 -mt-2 z-[999]">
           <KeyButton />
         </span>
-      </div>
+      </div >
 
       <ResponsiveGridLayout
         draggableHandle=".draggableHandle"
@@ -300,6 +301,12 @@ const Dashboardcontent: React.FC<DashboardContentProps> = ({ title, onTitleChang
                     <Cryptoportfoliotracker key={`${wid}-main`} wid={wid} />
                   </div>
                 );
+              case 'crptoporpriceticker':
+                return (
+                  <div key={wid} className={cn}>
+                    <Cryptopriceticker key={`${wid}-main`} wid={wid} />
+                  </div>
+                );
               case 'BREAK':
                 return (
                   <div key={idx}>
@@ -338,7 +345,8 @@ const Dashboardcontent: React.FC<DashboardContentProps> = ({ title, onTitleChang
             success
             onDismiss={() => setMovingToastShowed(false)}
           />
-        )}
+        )
+      }
 
       {/* source: https://codepen.io/mattmarble/pen/qBdamQz */}
       {
@@ -351,26 +359,28 @@ const Dashboardcontent: React.FC<DashboardContentProps> = ({ title, onTitleChang
       }
 
       {/* source: https://www.sliderrevolution.com/resources/css-animated-background/ */}
-      {tabSettings?.effect === 'FIREFLY' && (
-        <>
-          <div className="firefly"></div>
-          <div className="firefly"></div>
-          <div className="firefly"></div>
-          <div className="firefly"></div>
-          <div className="firefly"></div>
-          <div className="firefly"></div>
-          <div className="firefly"></div>
-          <div className="firefly"></div>
-          <div className="firefly"></div>
-          <div className="firefly"></div>
-          <div className="firefly"></div>
-          <div className="firefly"></div>
-          <div className="firefly"></div>
-          <div className="firefly"></div>
-          <div className="firefly"></div>
-        </>
-      )}
-    </>
+      {
+        tabSettings?.effect === 'FIREFLY' && (
+          <>
+            <div className="firefly"></div>
+            <div className="firefly"></div>
+            <div className="firefly"></div>
+            <div className="firefly"></div>
+            <div className="firefly"></div>
+            <div className="firefly"></div>
+            <div className="firefly"></div>
+            <div className="firefly"></div>
+            <div className="firefly"></div>
+            <div className="firefly"></div>
+            <div className="firefly"></div>
+            <div className="firefly"></div>
+            <div className="firefly"></div>
+            <div className="firefly"></div>
+            <div className="firefly"></div>
+          </>
+        )
+      }
+    </div >
   );
 }
 

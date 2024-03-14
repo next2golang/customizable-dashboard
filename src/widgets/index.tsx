@@ -11,7 +11,7 @@ import jsonStockMini from './StockMini/StockMini.json';
 import jsonToggl from './Toggl/Toggl.json';
 import jsonWeather from './Weather/Weather.json';
 import jsoncryptoportfoliotracker from './CryptoportfolioTracker/Cryptoportfoliotracker.json';
-
+import jsoncryptopricetracker from './CryptoPriceTicker/Cryptopriceticker.json';
 
 export function isIframeWidget(wid: string) {
   return wid.startsWith('stock') || wid.startsWith('embed') || wid.startsWith('rssreader');
@@ -35,5 +35,6 @@ export const widgetList: Widget[] = [
   jsonStockMini,
   jsonToggl,
   jsonWeather,
-  jsoncryptoportfoliotracker
+  jsoncryptoportfoliotracker,
+  jsoncryptopricetracker
 ];
