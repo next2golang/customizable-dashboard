@@ -24,16 +24,21 @@ export default function WidgetSettings({ wid, schema, onSubmit, onCancel }: Prop
     setValue
   } = useForm();
   const { settings, saveSettings } = useWidgetSettings(wid, (settings) => {
-    // console.log('--- settings', settings);
+
     settings ? Object.keys(settings).forEach((k) => setValue(k, settings[k])) : ''; // set setting values to form
+    console.log('--- settings', settings);
   });
   const publish = usePub();
 
   const onFormSubmit = async (formData: any) => {
-    // const { data, error } = await saveSettings(formData);
-    // if (!error) {
-    //   onSubmit(data.settings);
-    // }
+    try {
+      console.log(formData)
+      await saveSettings(formData);
+      onSubmit(formData);
+    } catch (error) {
+      console.error(error);
+      // Handle the error case
+    }
   };
 
   const handleInputChange = (event: any) => {
@@ -136,7 +141,7 @@ export default function WidgetSettings({ wid, schema, onSubmit, onCancel }: Prop
   };
 
   return (
-    <form className="text-sm" onSubmit={handleSubmit(onFormSubmit)}>
+    <form className="text-sm mt-2 " onSubmit={handleSubmit(onFormSubmit)}>
       {Object.entries(schema).map(([key, field]) => {
         return renderFormControl(key, field);
       })}

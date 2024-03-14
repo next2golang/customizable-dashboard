@@ -47,7 +47,7 @@ export default function Clock({ title, hourDiff }: Props) {
   };
 
   return (
-    <div className={'clock'}>
+    <div className="clock">
       <h3>{title}</h3>
       <div className={'analog-clock bg-gray-400'}>
         <div className={'dial seconds'} style={secondsStyle} />

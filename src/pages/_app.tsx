@@ -35,6 +35,7 @@ import { Layout } from '~/components/layout';
 import '~/styles/globals.css';
 import '~/styles/react-grid-layout.css';
 import '~/styles/react-resizable.css';
+import '~/styles/widgets.css';
 import '@rainbow-me/rainbowkit/styles.css';
 
 const { wallets } = getDefaultWallets();
