@@ -61,8 +61,43 @@ export default function Note({ wid }: Props) {
       render={() => {
         const arrNotes = Array(parseInt(settings?.total ?? '2')).fill(0);
         return (
-          <div className="p-2">
-            Note
+          <div key={`el_${noteIndex}`} className="w-full h-full relative flex flex-col">
+            {isSaving && <span className="absolute right-2 top-2 w-2 h-2 bg-green-300 rounded-full"></span>}
+            <textarea
+              defaultValue={settings?.[`text${noteIndex}`]}
+              onChange={onChange}
+              className="w-full h-full bg-gray-900 text-white p-2 z-1"
+              style={{ fontSize: parseInt(settings?.fontSize ?? '14') }}
+            ></textarea>
+
+            <ul className="flex bg-gray-1000 text-sm">
+              {arrNotes.map((item, idx) => {
+                const tabTitle = settings?.[`title${idx}`] || `Note ${idx + 1}`;
+                return (
+                  <li
+                    key={idx}
+                    data-idx={idx}
+                    className={`px-2 py-1 cursor-pointer hover:text-gray-500 ${noteIndex === idx && 'bg-gray-900'}`}
+                    onClick={(ev: any) => {
+                      if (!isSaving) {
+                        // save current tab => this messed up all tabs
+                        // setSettings((currentSettings) => {
+                        //   return {
+                        //     ...currentSettings,
+                        //     [`text${noteIndex}`]: text
+                        //   };
+                        // });
+                        // setText(settings[`text${idx!}`]!);
+                        setSkipSaving(true);
+                        setNoteIndex(idx);
+                      }
+                    }}
+                  >
+                    {tabTitle}
+                  </li>
+                );
+              })}
+            </ul>
           </div>
         );
       }}
