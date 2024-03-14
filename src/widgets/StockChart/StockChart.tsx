@@ -1,6 +1,6 @@
 import { memo, useState } from 'react';
 // import Script from 'react-script'
-// import { SymbolOverview } from 'react-tradingview-embed';
+import { SymbolOverview } from 'react-tradingview-embed';
 import json from './StockChart.json';
 import Widget from '../../components/Widget/Widget';
 import { WidgetWidth } from '../../utils/constants';
@@ -24,6 +24,16 @@ export default function StockChart({ wid, symbol }: Props) {
     return (
       <>
         <div id={wid + '-container'}></div>
+        <SymbolOverview
+          key={wid + '-' + theme}
+          widgetProps={{
+            container_id: wid + '-container',
+            width: WidgetWidth - 2,
+            height: hToPx(json.info.h) - 2,
+            symbols: [currentSymbol],
+            colorTheme: theme
+          }}
+        />
       </>
     );
   });
@@ -40,9 +50,7 @@ export default function StockChart({ wid, symbol }: Props) {
       }}
       render={() => {
         return (
-          <div className="p-2">
-            Stock Chart
-          </div>
+          <Chart />
         );
       }}
     />
