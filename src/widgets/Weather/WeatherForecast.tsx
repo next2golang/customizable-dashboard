@@ -17,19 +17,19 @@ export default function WeatherForecast(props: any) {
   async function load() {
     let longitude = props.coordinates.lon;
     let latitude = props.coordinates.lat;
-    // const apiUrl = `/api/weather/onecall?lat=${latitude}&lon=${longitude}`;
+    const apiUrl = `/api/weather/onecall?lat=${latitude}&lon=${longitude}`;
 
-    // const { data } = await apiGet(apiUrl, {});
-    // setForecast(data?.data?.daily);
+    const { data } = await apiGet(apiUrl, {});
+    setForecast(data?.data?.daily);
 
-    // const arr: any = [];
-    // (data?.data?.hourly ?? []).forEach((item: any, idx: number) => {
-    //   if (idx % 3 === 0) {
-    //     arr.push(item);
-    //   }
-    // });
-    // setHourlyData(arr);
-    // setLoaded(true);
+    const arr: any = [];
+    (data?.data?.hourly ?? []).forEach((item: any, idx: number) => {
+      if (idx % 3 === 0) {
+        arr.push(item);
+      }
+    });
+    setHourlyData(arr);
+    setLoaded(true);
   }
 
   if (loaded) {

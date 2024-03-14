@@ -1,0 +1,25 @@
+{
+  "info": {
+    "wid": "portfoliotracker",
+    "name": "Crypto Portfolio Tracker",
+    "thumbnail": "/thumbnail-crptoportfoliotracker.png",
+    "w": 2,
+    "h": 2
+  },
+  "schema": {
+    "wallet": {
+      "label": "wallet",
+      "type": "text",
+      "placeholder": "Wallet Address",
+      "autoFocus": true,
+      "validation": {
+        "required": "Wallet address is required",
+        "minLength": {
+          "value": 1,
+          "message": "Wallet address should be available"
+        }
+      }
+    }
+  }
+
+}

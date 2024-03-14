@@ -65,7 +65,7 @@ export default function Widget({ wid, schema, w, h, cn, render, onSettings }: Pr
     >
       {!isMoving ? (
         <div
-          className="flex z-999 gap-2  absolute right-0 items-center bg-blue-600 text-gray-300"
+          className="flex z-10 gap-2  absolute right-0 items-center bg-blue-600 text-gray-300"
         >
           <SettingsIcon wid={wid} onClick={toggleSettings} />
           <span

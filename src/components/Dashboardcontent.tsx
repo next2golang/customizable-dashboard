@@ -12,6 +12,7 @@ import StockMini from '~/widgets/StockMini/StockMini';
 import RSSReader from '~/widgets/RSSReader/RSSReader';
 import Quote from '~/widgets/Quote/Quote';
 import AnalogClock from '~/widgets/AnalogClock/AnalogClock';
+import Cryptoportfoliotracker from '~/widgets/CryptoportfolioTracker/cryptoportfoliotracker';
 import { isDoubleHeightWidget } from '~/widgets';
 
 
@@ -291,6 +292,12 @@ const Dashboardcontent: React.FC<DashboardContentProps> = ({ title, onTitleChang
                 return (
                   <div key={wid} className={cn}>
                     <Toggl key={`${wid}-main`} wid={wid} />
+                  </div>
+                );
+              case 'portfoliotracker':
+                return (
+                  <div key={wid} className={cn}>
+                    <Cryptoportfoliotracker key={`${wid}-main`} wid={wid} />
                   </div>
                 );
               case 'BREAK':
