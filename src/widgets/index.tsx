@@ -8,16 +8,22 @@ import jsonQuote from './Quote/Quote.json';
 import jsonRSSReader from './RSSReader/RSSReader.json';
 import jsonStockChart from './StockChart/StockChart.json';
 import jsonStockMini from './StockMini/StockMini.json';
-import jsonToggl from './Toggl/Toggl.json';
-import jsonWeather from './Weather/Weather.json';
+import jsoncryptoportfoliotracker from './CryptoportfolioTracker/Cryptoportfoliotracker.json';
+import jsoncryptopricetracker from './CryptoPriceTicker/Cryptopriceticker.json';
 
 export function isIframeWidget(wid: string) {
-  return wid.startsWith('stock') || wid.startsWith('embed') || wid.startsWith('rssreader');
+  return wid.startsWith('stock') || wid.startsWith('embed') || wid.startsWith('rssreader') || wid.startsWith('crptoporpriceticker') || wid.startsWith('portfoliotracker');
 }
 
 export function isDoubleHeightWidget(wid: string) {
   return (
-    wid.startsWith('embed-') || wid.startsWith('stock-') || wid.startsWith('toggl-') || wid.startsWith('rssreader-')
+    wid.startsWith('embed-') || wid.startsWith('stock-') || wid.startsWith('toggl-') || wid.startsWith('rssreader-') || wid.startsWith('crptoporpriceticker') || wid.startsWith('portfoliotracker')
+  );
+}
+
+export function isDoubleWidthWidget(wid: string) {
+  return (
+    wid.startsWith('crptoporpriceticker') || wid.startsWith('portfoliotracker')
   );
 }
 
@@ -31,6 +37,6 @@ export const widgetList: Widget[] = [
   jsonRSSReader,
   jsonStockChart,
   jsonStockMini,
-  jsonToggl,
-  jsonWeather
+  jsoncryptoportfoliotracker,
+  jsoncryptopricetracker
 ];

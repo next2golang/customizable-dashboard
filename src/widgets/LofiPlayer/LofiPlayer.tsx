@@ -54,8 +54,63 @@ export default function LofiPlayer({ wid }: Props) {
       }}
       render={() => {
         return (
-          <div className="p-2">
-            Lofi Player
+          <div className="flex flex-col items-center mt-2">
+            <h3>Lofi Player</h3>
+            <ul className="flex flex-wrap gap-2 mt-2 justify-center">
+              {arrMp3s.map((item, idx) => {
+                return (
+                  <li
+                    key={item}
+                    className={`text-xs px-3 py-1 bg-gray-500 hover:bg-gray-300 rounded-3xl text-sm cursor-pointer ${currentIndex === idx ? 'bg-gray-300' : ''
+                      }`}
+                    onClick={() => {
+                      setCurrentUrl(getMp3Url(idx));
+                      setCurrentIndex(idx);
+                    }}
+                  >
+                    {idx}
+                  </li>
+                );
+              })}
+            </ul>
+
+            {currentUrl && (
+              <video
+                key={currentUrl}
+                autoPlay
+                controls
+                loop={!isPlayRandom}
+                className="mt-2"
+                width="250"
+                style={{ height: 40 }}
+                onEnded={() => {
+                  console.log('isPlayRandom', isPlayRandom);
+                  if (isPlayRandom) {
+                    // music ended, play the next Random Music
+                    playRandomly();
+                  }
+                }}
+              >
+                <source src={currentUrl} type="video/mp4" />
+              </video>
+            )}
+
+            <div className="mt-2">
+              <label>
+                <input
+                  type="radio"
+                  name="playMode"
+                  onClick={() => {
+                    setIsPlayRandom(true);
+                    playRandomly();
+                  }}
+                />{' '}
+                Play randomly
+              </label>
+              <label>
+                <input type="radio" name="playMode" onClick={() => setIsPlayRandom(false)} /> Loop this music
+              </label>
+            </div>
           </div>
         );
       }}

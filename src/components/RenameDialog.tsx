@@ -72,3 +72,4 @@ export const RenameDialog: React.FC<RenameDialogProps> = ({ title, onTitleChange
     </Dialog>
   )
 }
+

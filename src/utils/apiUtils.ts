@@ -70,7 +70,8 @@ export const apiGet = async (path: string, params?: ApiParams) => {
       headers: path.startsWith('https') ? {} : getAuthHeader(params),
       ...params?.options
     });
-    cache[url] = { content: { data, status } }; // cache output
+    console.log(data, '@@@@@@@@@@@@@@@@@@@@@')
+    // cache[url] = { content: { data, status } }; // cache output
     return { data, status };
   } catch (err: any) {
     // // const { error, status } = catchError(err);

@@ -2,9 +2,7 @@ import { useEffect, useState, memo } from 'react';
 import { WidthProvider, Responsive, type Layouts, type Layout } from 'react-grid-layout';
 
 import StockChart from '~/widgets/StockChart/StockChart';
-import Weather from '~/widgets/Weather/Weather';
 import AirQuality from '~/widgets/AirQuality/AirQuality';
-import Toggl from '~/widgets/Toggl/Toggl';
 import Embed from '~/widgets/Embed/Embed';
 import LofiPlayer from '~/widgets/LofiPlayer/LofiPlayer';
 import Note from '~/widgets/Note/Note';
@@ -12,7 +10,9 @@ import StockMini from '~/widgets/StockMini/StockMini';
 import RSSReader from '~/widgets/RSSReader/RSSReader';
 import Quote from '~/widgets/Quote/Quote';
 import AnalogClock from '~/widgets/AnalogClock/AnalogClock';
-import { isDoubleHeightWidget } from '~/widgets';
+import Cryptoportfoliotracker from '~/widgets/CryptoportfolioTracker/cryptoportfoliotracker';
+import Cryptopriceticker from '~/widgets/CryptoPriceTicker/cryptopriceticker';
+import { isDoubleHeightWidget, isDoubleWidthWidget } from '~/widgets';
 
 
 import { generateWID, getLS } from '~/utils/appUtils';
@@ -149,18 +149,21 @@ const Dashboardcontent: React.FC<DashboardContentProps> = ({ title, onTitleChang
         if (isDoubleHeightWidget(item.i)) {
           item.h = 2;
         }
+        if (isDoubleWidthWidget(item.i)) {
+          item.w = 2;
+        }
       });
     }
   };
 
   return (
-    <>
-      <div className="flex mt-5 items-center ">
-        <span className="ml-5 mr-5">
+    <div className="overflow-y-auto">
+      <div className="flex mt-5 items-center">
+        < span className="ml-5 mr-5" >
           <Button className="btn mt-4 ml-4 mb-4 dark:text-black" onClick={() => setAddmodalShowed(true)}>
             Add Widget
           </Button>
-        </span>
+        </span >
 
         <span className="mr-5">
           <RenameDialog title={title} onTitleChange={onTitleChange} />
@@ -170,10 +173,10 @@ const Dashboardcontent: React.FC<DashboardContentProps> = ({ title, onTitleChang
           <DeleteDialog RemoveDashboard={RemoveDashboard} />
         </span>
 
-        <span className="absolute right-0 mr-5 -mt-2">
+        <span className="absolute right-0 mr-5 -mt-2 z-[999]">
           <KeyButton />
         </span>
-      </div>
+      </div >
 
       <ResponsiveGridLayout
         draggableHandle=".draggableHandle"
@@ -227,12 +230,6 @@ const Dashboardcontent: React.FC<DashboardContentProps> = ({ title, onTitleChang
             const type = wid.split('-')[0];
             const cn = ``;
             switch (type) {
-              case 'weather':
-                return (
-                  <div key={wid} className={cn}>
-                    <Weather key={`${wid}-main`} wid={wid} />
-                  </div>
-                );
               case 'analogclock':
                 return (
                   <div key={wid} className={cn}>
@@ -287,10 +284,16 @@ const Dashboardcontent: React.FC<DashboardContentProps> = ({ title, onTitleChang
                     <StockMini key={`${wid}-main`} wid={wid} symbol="SPY" />
                   </div>
                 );
-              case 'toggl':
+              case 'portfoliotracker':
                 return (
                   <div key={wid} className={cn}>
-                    <Toggl key={`${wid}-main`} wid={wid} />
+                    <Cryptoportfoliotracker key={`${wid}-main`} wid={wid} />
+                  </div>
+                );
+              case 'crptoporpriceticker':
+                return (
+                  <div key={wid} className={cn}>
+                    <Cryptopriceticker key={`${wid}-main`} wid={wid} />
                   </div>
                 );
               case 'BREAK':
@@ -331,7 +334,8 @@ const Dashboardcontent: React.FC<DashboardContentProps> = ({ title, onTitleChang
             success
             onDismiss={() => setMovingToastShowed(false)}
           />
-        )}
+        )
+      }
 
       {/* source: https://codepen.io/mattmarble/pen/qBdamQz */}
       {
@@ -344,26 +348,28 @@ const Dashboardcontent: React.FC<DashboardContentProps> = ({ title, onTitleChang
       }
 
       {/* source: https://www.sliderrevolution.com/resources/css-animated-background/ */}
-      {tabSettings?.effect === 'FIREFLY' && (
-        <>
-          <div className="firefly"></div>
-          <div className="firefly"></div>
-          <div className="firefly"></div>
-          <div className="firefly"></div>
-          <div className="firefly"></div>
-          <div className="firefly"></div>
-          <div className="firefly"></div>
-          <div className="firefly"></div>
-          <div className="firefly"></div>
-          <div className="firefly"></div>
-          <div className="firefly"></div>
-          <div className="firefly"></div>
-          <div className="firefly"></div>
-          <div className="firefly"></div>
-          <div className="firefly"></div>
-        </>
-      )}
-    </>
+      {
+        tabSettings?.effect === 'FIREFLY' && (
+          <>
+            <div className="firefly"></div>
+            <div className="firefly"></div>
+            <div className="firefly"></div>
+            <div className="firefly"></div>
+            <div className="firefly"></div>
+            <div className="firefly"></div>
+            <div className="firefly"></div>
+            <div className="firefly"></div>
+            <div className="firefly"></div>
+            <div className="firefly"></div>
+            <div className="firefly"></div>
+            <div className="firefly"></div>
+            <div className="firefly"></div>
+            <div className="firefly"></div>
+            <div className="firefly"></div>
+          </>
+        )
+      }
+    </div >
   );
 }
 

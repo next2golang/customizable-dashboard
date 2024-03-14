@@ -23,19 +23,19 @@ export default function Weather({ wid }: Props) {
     // console.log(apiUrl, wid, city, '---------------')
     // const data = await apiGet(apiUrl, {});
     // const info = data?.data;
-    // console.log("111",data);
-    // if(info)
-    // setWeatherdData({
-    //   ready: true,
-    //   coordinates: info.coord,
-    //   temperature: info.main.temp,
-    //   humidity: info.main.humidity,
-    //   date: new Date(info.dt * 1000),
-    //   description: info.weather[0].description,
-    //   icon: info.weather[0].icon,
-    //   wind: info.wind.speed,
-    //   city: info.name
-    // });
+    // console.log("111", data);
+    // if (info)
+    //   setWeatherdData({
+    //     ready: true,
+    //     coordinates: info.coord,
+    //     temperature: info.main.temp,
+    //     humidity: info.main.humidity,
+    //     date: new Date(info.dt * 1000),
+    //     description: info.weather[0].description,
+    //     icon: info.weather[0].icon,
+    //     wind: info.wind.speed,
+    //     city: info.name
+    //   });
   }
 
   return (
@@ -51,9 +51,18 @@ export default function Weather({ wid }: Props) {
       render={({ settings }) => {
         // console.log('settings', settings);
         return (
-          <div className="p-2">
-            Weather
-          </div>
+          <>
+            {weatherData.ready && (
+              <div className="text-center">
+                <WeatherInfo settings={settings} data={weatherData} />
+                <WeatherForecast
+                  settings={settings}
+                  days={parseInt(settings?.days ?? '4')}
+                  coordinates={weatherData.coordinates}
+                />
+              </div>
+            )}
+          </>
         );
       }}
     />

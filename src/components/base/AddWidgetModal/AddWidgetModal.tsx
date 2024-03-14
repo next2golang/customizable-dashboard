@@ -25,7 +25,7 @@ export default function AddWidgetModal({ onConfirm, onCancel }: Props) {
           <h3 className="text-black">
             Select a Widget
           </h3>
-          <ul className="flex flex-wrap mt-2 gap-4 max-h-[400px] overflow-y-scroll">
+          <ul className="flex flex-wrap mt-2 gap-4 max-h-[400px] overflow-y-scroll no-scrollbar items-center">
             {widgetList.map((widget) => {
               // console.log('widget', widget);
               return (

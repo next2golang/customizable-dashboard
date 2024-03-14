@@ -60,12 +60,12 @@ export default function Widget({ wid, schema, w, h, cn, render, onSettings }: Pr
   return (
     <div
       // border-2 border-gray-100 rounded-md
-      className={`relative overflow-hidden bg-[#11141d] rounded-lg widget-shadow shadow-lg shadow-blue-500/50 ${borderCss} ${cn ?? ''}`}
+      className={`relative overflow-hidden bg-white dark:bg-[#11141d] dark: rounded-lg widget-shadow shadow-lg shadow-blue-500/50 ${borderCss} ${cn ?? ''}`}
       style={{ width: WidgetWidth * w, height: hToPx(h) }}
     >
       {!isMoving ? (
         <div
-          className="flex z-999 gap-2  absolute right-0 items-center bg-blue-600 text-gray-300"
+          className="flex z-[10] gap-2  absolute right-0 items-center bg-blue-600 text-gray-300"
         >
           <SettingsIcon wid={wid} onClick={toggleSettings} />
           <span

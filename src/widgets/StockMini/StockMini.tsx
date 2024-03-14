@@ -1,5 +1,5 @@
 import { memo, useMemo, useState } from 'react';
-// import { MiniChart, SymbolOverview } from 'react-tradingview-embed';
+import { MiniChart, SymbolOverview } from 'react-tradingview-embed';
 import json from './StockMini.json';
 import Widget from '../../components/Widget/Widget';
 import { WidgetHeight, WidgetWidth } from '../../utils/constants';
@@ -20,7 +20,15 @@ export default function StockMini({ wid, symbol }: Props) {
   // memo: to avoid re-rendering (when moving widget)
   const Chart = memo(() => {
     return (
-      <></>
+      <MiniChart
+        key={wid + '-' + theme}
+        widgetProps={{
+          width: WidgetWidth,
+          height: WidgetHeight - 2,
+          symbol: currentSymbol,
+          colorTheme: theme
+        }}
+      />
     );
   });
 
@@ -36,9 +44,7 @@ export default function StockMini({ wid, symbol }: Props) {
       }}
       render={() => {
         return (
-          <div className="p-2">
-            Stock Mini
-          </div>
+          <Chart />
         );
       }}
     />

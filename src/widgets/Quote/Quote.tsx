@@ -38,7 +38,14 @@ export default function Quote({ wid }: Props) {
       render={({ settings }) => {
         return (
           <div className="p-2">
-            Quote
+            <blockquote className={`mb-1 ${settings?.italic ? 'italic' : ''}`}>
+              <div className="">&ldquo;{quoteData?.content}&rdquo;</div>
+              <footer>&mdash; {quoteData?.author}</footer>
+            </blockquote>
+
+            <a className="link-minor" onClick={() => fetchDebounced()}>
+              <FiRefreshCcw />
+            </a>
           </div>
         );
       }}

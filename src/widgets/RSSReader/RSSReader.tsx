@@ -50,13 +50,29 @@ export default function RSSReader({ wid }: Props) {
       schema={json.schema}
       w={json.info.w}
       h={json.info.h}
-      cn="overflow-hidden"
+      cn="overflow-y-scroll"
       onSettings={({ settings }) => {
       }}
       render={({ settings }) => {
         return (
           <div className="p-2">
-            RSS Reader
+            {err ? (
+              <div>Failed to load RSS URL. Please try with another URL in the Settings.</div>
+            ) : (
+              <>
+                <ul className="flex flex-col gap-4">
+                  {items.map((item) => {
+                    const imgUrl = item?.thumbnail?.replace(/\&amp;/gi, '&');
+                    return (
+                      <a key={item.title} role="button" className="flex gap-2" href={item.link} target="_blank">
+                        {imgUrl && <img src={imgUrl} className="min-w-[100px] h-14 mt-1" />}
+                        <span className="text-gray-500 hover:text-gray-800 cursor-pointer">{item.title}</span>
+                      </a>
+                    );
+                  })}
+                </ul>
+              </>
+            )}
           </div>
         );
       }}
