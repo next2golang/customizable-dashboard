@@ -1,8 +1,8 @@
-import { Dispatch, SetStateAction, useEffect, useState } from "react";
-import { Transition } from "@headlessui/react";
-import axios from "axios";
-import { Coin } from "../types";
-import { SearchResult } from "./SearchResult";
+import { Dispatch, SetStateAction, useEffect, useState } from 'react';
+import { Transition } from '@headlessui/react';
+import axios from 'axios';
+import { Coin } from '../types';
+import { SearchResult } from './SearchResult';
 
 interface ModalProps {
   setModalOpen: Dispatch<SetStateAction<boolean>>;

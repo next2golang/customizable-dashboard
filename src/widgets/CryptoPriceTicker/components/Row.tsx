@@ -1,4 +1,4 @@
-import { Coin } from "../types";
+import { Coin } from '../types';
 
 interface RowProps {
   coin: Coin;

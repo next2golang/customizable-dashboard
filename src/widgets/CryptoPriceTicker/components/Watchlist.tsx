@@ -1,11 +1,10 @@
-import { Dispatch, SetStateAction } from "react";
-import { Row } from "./Row";
-import { useEffect, useState } from "react";
-import axios from "axios";
-import { Coin } from "../types";
-import { WatchlistModal } from "./WatchlistModal";
-import { Transition } from "@headlessui/react";
-
+import { Dispatch, SetStateAction } from 'react';
+import { Row } from './Row';
+import { useEffect, useState } from 'react';
+import axios from 'axios';
+import { Coin } from '../types';
+import { WatchlistModal } from './WatchlistModal';
+import { Transition } from '@headlessui/react';
 interface WatchlistProps {
   setWatchlist: Dispatch<SetStateAction<string[]>>;
   watchlist: string[];

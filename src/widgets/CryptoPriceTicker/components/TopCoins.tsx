@@ -1,10 +1,8 @@
-import { Row } from "./Row";
-import { useEffect, useState } from "react";
-import axios from "axios";
-import { apiGet } from '~/utils/apiUtils';
-import _ from 'lodash';
+import { Row } from './Row';
+import { useEffect, useState } from 'react';
+import axios from 'axios';
 
-import { Coin } from "../types";
+import { Coin } from '../types';
 
 export const TopCoins = () => {
   const [coins, setCoins] = useState<Coin[]>([]);

@@ -1,6 +1,6 @@
-import { Coin } from "../types";
-import { useState, Dispatch, SetStateAction } from "react";
-import { Switch } from "@headlessui/react";
+import { Coin } from '../types';
+import { useState, Dispatch, SetStateAction } from 'react';
+import { Switch } from '@headlessui/react';
 
 interface SearchResultProps {
   coin: Coin;
