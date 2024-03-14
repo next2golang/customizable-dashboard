@@ -78,7 +78,7 @@ export const WatchlistModal = ({
         leaveTo="translate-y-10"
       >
         <div
-          className="relative w-full max-w-sm mx-auto rounded-sm bg-white dark:bg-dark p-4 shadow-lg"
+          className="relative w-full max-w-sm mx-auto rounded-sm bg-gray-700 dark:bg-dark p-4 shadow-lg"
           onClick={(e) => e.stopPropagation()}
         >
           {/* Close btn */}
@@ -97,7 +97,7 @@ export const WatchlistModal = ({
               placeholder="Search coins.."
               onChange={(e) => setSearchQuery(e.target.value)}
               className="px-2 my-2 border rounded text-sm focus:outline-none
-                h-7 bg-gray-100 block mx-auto"
+                h-7 bg-gray-100 block mx-auto text-black"
             />
 
             <div className="overflow-y-auto scrollbar-thin scrollbar-thumb-blue-900 scrollbar-track-gray-50 pr-2 h-48">

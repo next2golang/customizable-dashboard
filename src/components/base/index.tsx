@@ -250,7 +250,7 @@ export const Modal = ({
 
   return (
     <div
-      className={`fixed z-10 inset-0 overflow-y-auto ${className}`}
+      className={`fixed z-10 inset-0 overflow-y-hidden ${className}`}
       aria-labelledby="modal-title"
       role="dialog"
       aria-modal="true"

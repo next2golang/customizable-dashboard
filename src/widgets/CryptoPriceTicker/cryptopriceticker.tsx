@@ -25,8 +25,8 @@ export default function Cryptopriceticker({ wid }: Props) {
 
     return (
       <div className="h-screen max-h-screen container max-w-6xl overflow-hidden flex flex-col sm:px-4">
-        <span className="text-center text-[25px]"> Crypto Price </span>
-        <div className="bg-gray-900 rounded  p-2 sm:p-4 md:p-4 pt-4 overflow-hidden flex flex-col h-full">
+        <span className="text-center text-[2px]"> Crypto Price </span>
+        <div className="bg-white dark:bg-gray-900 rounded  p-2 sm:p-4 md:p-4 pt-4 overflow-hidden flex flex-col h-full">
           <Header setTable={setTable} table={table} />
           <main className="overflow-hidden flex flex-col">
             <TableHeader />

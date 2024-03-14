@@ -2,7 +2,7 @@
   "info": {
     "wid": "airq",
     "name": "Air Quality",
-    "thumbnail": "",
+    "thumbnail": "/thumbnail-airquality.png",
     "w": 1,
     "h": 1
   },

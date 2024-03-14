@@ -20,7 +20,7 @@ export default function AnalogClock({ wid }: Props) {
       render={({ settings }) => {
         return (
           <div className="p-2 flex">
-            <Clock title={settings?.title1 ?? 'Lcoal'} hourDiff={settings?.hourDiff1 ?? '0'} />
+            <Clock title={settings?.title1 ?? 'Local'} hourDiff={settings?.hourDiff1 ?? '0'} />
             {settings?.title2 && <Clock title={settings?.title2 ?? 'New York'} hourDiff={settings?.hourDiff2 ?? '0'} />}
           </div>
         );

@@ -1,6 +1,9 @@
 import { Row } from "./Row";
 import { useEffect, useState } from "react";
 import axios from "axios";
+import { apiGet } from '~/utils/apiUtils';
+import _ from 'lodash';
+
 import { Coin } from "../types";
 
 export const TopCoins = () => {
@@ -18,7 +21,7 @@ export const TopCoins = () => {
           cancelToken: source.token,
           params: {
             vs_currency: "usd",
-            price_change_percentage: "10s",
+            price_change_percentage: "30s",
           },
         })
         .then((res) => setCoins(res.data))
@@ -35,6 +38,7 @@ export const TopCoins = () => {
 
     fetchData();
 
+    console.log('^^^^^^^^^^^^^^^^^^')
     return () => source.cancel();
   }, []);
 

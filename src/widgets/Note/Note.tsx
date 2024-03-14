@@ -66,7 +66,7 @@ export default function Note({ wid }: Props) {
             <textarea
               defaultValue={settings?.[`text${noteIndex}`]}
               onChange={onChange}
-              className="w-full h-full bg-gray-900 text-white p-2 z-1"
+              className="w-full h-full bg:white dark:bg-gray-900 text-white p-2 z-1"
               style={{ fontSize: parseInt(settings?.fontSize ?? '14') }}
             ></textarea>
 
@@ -77,7 +77,7 @@ export default function Note({ wid }: Props) {
                   <li
                     key={idx}
                     data-idx={idx}
-                    className={`px-2 py-1 cursor-pointer hover:text-gray-500 ${noteIndex === idx && 'bg-gray-900'}`}
+                    className={`px-2 py-1 cursor-pointer hover:text-gray-500 ${noteIndex === idx && 'bg-gray-300 dark:bg-gray-900'}`}
                     onClick={(ev: any) => {
                       if (!isSaving) {
                         // save current tab => this messed up all tabs

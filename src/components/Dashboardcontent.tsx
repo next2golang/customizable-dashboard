@@ -2,9 +2,7 @@ import { useEffect, useState, memo } from 'react';
 import { WidthProvider, Responsive, type Layouts, type Layout } from 'react-grid-layout';
 
 import StockChart from '~/widgets/StockChart/StockChart';
-import Weather from '~/widgets/Weather/Weather';
 import AirQuality from '~/widgets/AirQuality/AirQuality';
-import Toggl from '~/widgets/Toggl/Toggl';
 import Embed from '~/widgets/Embed/Embed';
 import LofiPlayer from '~/widgets/LofiPlayer/LofiPlayer';
 import Note from '~/widgets/Note/Note';
@@ -14,7 +12,7 @@ import Quote from '~/widgets/Quote/Quote';
 import AnalogClock from '~/widgets/AnalogClock/AnalogClock';
 import Cryptoportfoliotracker from '~/widgets/CryptoportfolioTracker/cryptoportfoliotracker';
 import Cryptopriceticker from '~/widgets/CryptoPriceTicker/cryptopriceticker';
-import { isDoubleHeightWidget } from '~/widgets';
+import { isDoubleHeightWidget, isDoubleWidthWidget } from '~/widgets';
 
 
 import { generateWID, getLS } from '~/utils/appUtils';
@@ -151,6 +149,9 @@ const Dashboardcontent: React.FC<DashboardContentProps> = ({ title, onTitleChang
         if (isDoubleHeightWidget(item.i)) {
           item.h = 2;
         }
+        if (isDoubleWidthWidget(item.i)) {
+          item.w = 2;
+        }
       });
     }
   };
@@ -229,12 +230,6 @@ const Dashboardcontent: React.FC<DashboardContentProps> = ({ title, onTitleChang
             const type = wid.split('-')[0];
             const cn = ``;
             switch (type) {
-              case 'weather':
-                return (
-                  <div key={wid} className={cn}>
-                    <Weather key={`${wid}-main`} wid={wid} />
-                  </div>
-                );
               case 'analogclock':
                 return (
                   <div key={wid} className={cn}>
@@ -287,12 +282,6 @@ const Dashboardcontent: React.FC<DashboardContentProps> = ({ title, onTitleChang
                 return (
                   <div key={wid} className={cn}>
                     <StockMini key={`${wid}-main`} wid={wid} symbol="SPY" />
-                  </div>
-                );
-              case 'toggl':
-                return (
-                  <div key={wid} className={cn}>
-                    <Toggl key={`${wid}-main`} wid={wid} />
                   </div>
                 );
               case 'portfoliotracker':

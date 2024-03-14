@@ -31,7 +31,7 @@ export const SearchResult = ({
 
   return (
     <div
-      className={`py-1 px-2 border-b flex items-center overflow-hidden transition ease-in-out duration-200 ${isSelected ? "bg-blue-100 border-blue-200" : "bg-white"
+      className={`py-1 px-2 border-b flex items-center overflow-hidden transition ease-in-out duration-200 ${isSelected ? "bg-gray-700 border-blue-200" : "bg-gray-700"
         }`}
     >
       <div className="w-full flex gap-3 items-center ">
@@ -47,7 +47,7 @@ export const SearchResult = ({
       <Switch
         checked={isSelected}
         onChange={toggle}
-        className={`${isSelected ? "bg-blue-600" : "bg-gray-200"
+        className={`${isSelected ? "bg-blue-600" : "bg-gray-500"
           } relative inline-flex h-5 w-11 items-center shrink-0 rounded-full`}
       >
         <span className="sr-only">{coin.name}</span>
