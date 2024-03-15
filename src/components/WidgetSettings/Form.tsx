@@ -15,7 +15,7 @@ export const Form = ({ fields }: FormProps) => {
   } = formMethods;
 
   function onSubmit(data: any) {
-    console.log(data);
+    // console.log(data);
   }
 
   return (

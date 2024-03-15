@@ -4,7 +4,7 @@ import * as React from 'react'
 import { useSession } from 'next-auth/react';
 import { useRouter } from 'next/router';
 
-import { DashboardTabs } from '~/components/DashboardTabs';
+import DashboardTabs from '~/components/DashboardTabs';
 
 
 

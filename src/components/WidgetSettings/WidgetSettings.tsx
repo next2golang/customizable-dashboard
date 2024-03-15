@@ -26,13 +26,13 @@ export default function WidgetSettings({ wid, schema, onSubmit, onCancel }: Prop
   const { settings, saveSettings } = useWidgetSettings(wid, (settings) => {
 
     settings ? Object.keys(settings).forEach((k) => setValue(k, settings[k])) : ''; // set setting values to form
-    console.log('--- settings', settings);
+    // console.log('--- settings', settings);
   });
   const publish = usePub();
 
   const onFormSubmit = async (formData: any) => {
     try {
-      console.log(formData)
+      // console.log(formData)
       await saveSettings(formData);
       onSubmit(formData);
     } catch (error) {

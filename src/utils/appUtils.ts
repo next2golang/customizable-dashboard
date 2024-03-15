@@ -1,11 +1,7 @@
 import { WidgetHeight } from './constants';
-
+import { useState, useEffect } from 'react'
 export function getLS(key: string, defaultValue: any, parseJson = false) {
-  let value;
-  if (typeof window !== 'undefined') {
-    // Perform localStorage action
-    value = localStorage.getItem('key')
-  }
+  let value = localStorage.getItem(key);
   if (value === 'undefined') {
     return defaultValue; // unusual case
   }
@@ -24,10 +20,6 @@ export function getLS(key: string, defaultValue: any, parseJson = false) {
   return value ?? defaultValue;
 }
 
-if (typeof window !== 'undefined') {
-  // Perform localStorage action
-  const item = localStorage.getItem('key')
-}
 export function logOut() {
   localStorage.removeItem('tk');
   window.location.reload(); // log out

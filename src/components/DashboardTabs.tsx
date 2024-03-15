@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react';
+import React, { useEffect, useRef, useState, memo } from 'react';
 import { Tabs, Tab } from '@nextui-org/react';
 
 import Dashboardcontent from '~/components/Dashboardcontent';
@@ -19,7 +19,7 @@ const initialItems = [
     { title: 'Dashboard 1', children: '', key: '1' },
 ];
 
-export const DashboardTabs = () => {
+const DashboardTabs = () => {
     const [tablabels, setTabLabels] = useState<string[]>(['Dashboard1']);
     const [activeKey, setActiveKey] = useState(initialItems[0]?.key);
     const [activeTitle, setActiveTitle] = useState(initialItems[0]?.title);
@@ -64,6 +64,7 @@ export const DashboardTabs = () => {
         setActiveKey(key.toString());
         const title = items.filter((item) => item.key === key.toString())[0]?.title;
         setActiveTitle(title)
+
     }
 
     const handleChangeTitle = (nTitle: string) => {
@@ -139,7 +140,9 @@ export const DashboardTabs = () => {
                     +
                 </div>
             </div>
-            <Dashboardcontent key={activeKey} title={activeTitle!} onTitleChange={handleChangeTitle} RemoveDashboard={RemoveDashboard} />
+            <Dashboardcontent key={activeKey} tabKey={Number(activeKey!)} title={activeTitle!} onTitleChange={handleChangeTitle} RemoveDashboard={RemoveDashboard} />
         </>
     );
 }
+
+export default memo(DashboardTabs);
