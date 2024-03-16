@@ -5,6 +5,7 @@ import { useForm } from 'react-hook-form'
 import { z } from 'zod'
 
 import { Button } from '~/components/ui/button'
+import { PubSubEvent, usePub } from '~/hooks/usePubSub';
 
 import {
   Form,
@@ -25,6 +26,8 @@ const FormSchema = z.object({
 })
 
 export default function Home() {
+  const publish = usePub();
+
   const form = useForm<z.infer<typeof FormSchema>>({
     resolver: zodResolver(FormSchema),
     defaultValues: {
@@ -33,14 +36,8 @@ export default function Home() {
   })
 
   function onSubmit(data: z.infer<typeof FormSchema>) {
-    alert({
-      title: 'You submitted the following values:',
-      description: (
-        <pre className="mt-2 w-[340px] rounded-md bg-slate-950 p-4">
-          <code className="text-white">{JSON.stringify(data, null, 2)}</code>
-        </pre>
-      ),
-    })
+    alert('firset')
+    publish(PubSubEvent.Saving, { save: true });
   }
 
   return (
@@ -64,7 +61,9 @@ export default function Home() {
             )}
           />
           <div className="flex justify-end">
-            <Button type="submit" className="text-white bg-gradient-to-r from-green-400 via-green-500 to-green-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-green-300 dark:focus:ring-green-800 shadow-lg shadow-green-500/50 dark:shadow-lg dark:shadow-green-800/80 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2">Submit</Button>
+            <Button
+              type="submit"
+              className="text-white bg-gradient-to-r from-green-400 via-green-500 to-green-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-green-300 dark:focus:ring-green-800 shadow-lg shadow-green-500/50 dark:shadow-lg dark:shadow-green-800/80 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2">Submit</Button>
           </div>
         </form>
       </Form>

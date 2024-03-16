@@ -26,6 +26,7 @@ import { saveTabDB, getTabDB, saveTabLS } from '../lib/MainPageUtils';
 import { type UserWidget, type Widget } from '../../types';
 import { Toast } from '~/components/base';
 import { Button } from '~/components/base';
+import { Submit } from '~/components/ui/submitButton';
 import { KeyButton } from '~/components/ui/KeyButton';
 import AddWidgetModal from '~/components/base/AddWidgetModal/AddWidgetModal';
 import { RenameDialog } from './RenameDialog'
@@ -48,13 +49,13 @@ const Dashboardcontent: React.FC<DashboardContentProps> = ({ tabKey, title, onTi
 
   const [movingToastShowed, setMovingToastShowed] = useState(false);
   const [isMoving, setIsMoving] = useState(false);
-
+  const [isSave, setIsSave] = useState(false);
   const [isReady, setIsReady] = useState(false);
 
-  // const [userWidgets, setUserWidgets] = useState<UserWidget[]>(getLS(`userWidgets${tab}`, DefaultWidgets, true));
-  // const [layout, setLayout] = useState<Layout[]>(getLS(`userLayout${tab}`, DefaultLayout, true));
-  const [userWidgets, setUserWidgets] = useState<UserWidget[]>(DefaultWidgets);
-  const [layout, setLayout] = useState<Layout[]>(DefaultLayout);
+  const [userWidgets, setUserWidgets] = useState<UserWidget[]>(getLS(`userWidgets${tab}`, DefaultWidgets, true));
+  const [layout, setLayout] = useState<Layout[]>(getLS(`userLayout${tab}`, DefaultLayout, true));
+  // const [userWidgets, setUserWidgets] = useState<UserWidget[]>(DefaultWidgets);
+  // const [layout, setLayout] = useState<Layout[]>(DefaultLayout);
   const [currentBreakpoint, setCurrentBreakpoint] = useState('');
 
   const getLSLayout = (size: string) => {
@@ -74,21 +75,26 @@ const Dashboardcontent: React.FC<DashboardContentProps> = ({ tabKey, title, onTi
     setIsMoving(!isMoving);
   });
 
+  useSub(PubSubEvent.Saving, () => {
+    // alert('second')
+    setIsSave(!isSave);
+  });
+
   useEffect(() => {
     // alert('first')
     const fetchData = async () => {
       // console.log(tab)
       setIsReady(false);
-      const response = await getTabDB(address?.toString()!, tab);
-      if (response.userWidgets == null) {
-        setUserWidgets(DefaultWidgets);
-        setLayout(DefaultLayout);
-      }
-      else {
-        setUserWidgets(response.userWidgets);
-        setLayout(response.userLayout);
-      }
-      console.log(response)
+      // const response = await getTabDB(address?.toString()!, tab);
+      // if (response.userWidgets == null) {
+      //   setUserWidgets(DefaultWidgets);
+      //   setLayout(DefaultLayout);
+      // }
+      // else {
+      //   setUserWidgets(response.userWidgets);
+      //   setLayout(response.userLayout);
+      // }
+      // console.log(response)
       setIsReady(true);
       // const token = localStorage.getItem('tk') ?? '';
       // if (token) {
@@ -177,8 +183,11 @@ const Dashboardcontent: React.FC<DashboardContentProps> = ({ tabKey, title, onTi
       // if (movingToastShowed) {
       // only save layout when moving widgets
       // alert('OnLayoutChange');
-      // saveTabLS(tab, userWidgets, currentLayout);
-      saveTabDB(address?.toString()!, tab, title, userWidgets, currentLayout);
+      saveTabLS(tab, userWidgets, currentLayout);
+      // if (isSave) {
+      //   alert('success');
+      //   // saveTabDB(address?.toString()!, tab, title, userWidgets, currentLayout);
+      // }
 
       localStorage.setItem(`userLayout${tab}${currentBreakpoint}`, JSON.stringify(currentLayout));
       // }
@@ -193,6 +202,10 @@ const Dashboardcontent: React.FC<DashboardContentProps> = ({ tabKey, title, onTi
       });
 
       setIsReady(false);
+    }
+    if (isSave) {
+      alert('success');
+      // saveTabDB(address?.toString()!, tab, title, userWidgets, currentLayout);
     }
   };
 
@@ -326,11 +339,19 @@ const Dashboardcontent: React.FC<DashboardContentProps> = ({ tabKey, title, onTi
     </ResponsiveGridLayout>
   }, [layouts, userWidgets])
 
+  if (isSave) {
+    // alert('success');
+    const currentLayout = getLS(`userLayout${tab}`, DefaultLayout, true);
+    saveTabDB(address?.toString()!, tab, title, userWidgets, currentLayout!);
+
+    setIsSave(false);
+  }
+
   return (
-    <div className="overflow-y-auto">
+    <div className="overflow-y-hidden">
       <div className="flex mt-5 items-center">
         < span className="ml-5 mr-5" >
-          <Button className="btn mt-4 ml-4 mb-4 dark:text-black" onClick={() => setAddmodalShowed(true)}>
+          <Button className="btn mt-4 ml-4 mb-4 dark:text-black" onClick={() => { setAddmodalShowed(true); }}>
             Add Widget
           </Button>
         </span >
@@ -343,7 +364,8 @@ const Dashboardcontent: React.FC<DashboardContentProps> = ({ tabKey, title, onTi
           <DeleteDialog RemoveDashboard={RemoveDashboard} />
         </span>
 
-        <span className="absolute right-0 mr-5 -mt-2 z-[999]">
+        <span className="flex absolute right-0 mr-5 -mt-2 z-[999]">
+          <Submit />
           <KeyButton />
         </span>
       </div >

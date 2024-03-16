@@ -80,7 +80,7 @@ const DashboardTabs = () => {
         const title = newPanes.filter((item) => item.tab === newActiveKey)[0]?.name;
         setActiveTitle(title)
 
-        await removeTabDB(address?.toString()!, Number(activeKey));
+        // await removeTabDB(address?.toString()!, Number(activeKey));
 
         localStorage.removeItem(`userWidgets${activeKey}`);
         localStorage.removeItem(`userLayout${activeKey}`);

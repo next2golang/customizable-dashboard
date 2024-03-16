@@ -10,6 +10,7 @@ export const PubSubEvent = {
   SignInDone: 'SignInDone',
   Moving: 'Moving',
   MovingToast: 'MovingToast',
+  Saving: 'Saving',
 };
 
 export const useSub = (event: string, callback: any) => {
