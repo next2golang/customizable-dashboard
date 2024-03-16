@@ -164,7 +164,7 @@ const Dashboardcontent: React.FC<DashboardContentProps> = ({ tabKey, title, onTi
       // only save layout when moving widgets
       // alert('OnLayoutChange');
       saveTabLS(tab, userWidgets, currentLayout);
-      saveTabDB(tab, userWidgets, currentLayout);
+      saveTabDB(tab, title, userWidgets, currentLayout);
 
       localStorage.setItem(`userLayout${tab}${currentBreakpoint}`, JSON.stringify(currentLayout));
       // }

@@ -20,6 +20,7 @@ const initialItems = [
 ];
 
 const DashboardTabs = () => {
+    // const [tablabels, setTabLabels] = useState<string[]>(Loaditemsfromlocalstorage);
     const [tablabels, setTabLabels] = useState<string[]>(['Dashboard1']);
     const [activeKey, setActiveKey] = useState(initialItems[0]?.key);
     const [activeTitle, setActiveTitle] = useState(initialItems[0]?.title);
@@ -39,6 +40,13 @@ const DashboardTabs = () => {
     }
 
     const remove = (targetKey: string) => {
+        localStorage.removeItem(`userWidgets${activeKey}`);
+        localStorage.removeItem(`userLayout${activeKey}`);
+        localStorage.removeItem(`userLayout${activeKey}sm`);
+        localStorage.removeItem(`userLayout${activeKey}md`);
+        localStorage.removeItem(`userLayout${activeKey}lg`);
+        localStorage.removeItem(`userLayout${activeKey}xl`);
+
         let newActiveKey = activeKey;
         let lastIndex = -1;
         items.forEach((item, i) => {

@@ -15,35 +15,43 @@ datasource db {
   directUrl = env("DIRECT_DATABASE_URL")
 }
 
-//Layout Schema
+//Dashboard Schema
+model Dashboards {
+  id          String    @id @default(cuid())
+  name        String
+  tab         Int       @unique
+  createdBy   User      @relation(fields: [createdById], references: [id], onDelete: Cascade)
+  createdById String
+  Layouts     Layouts[]
+  Widgets     Widgets[]
+
+  @@index([tab])
+}
+
+//layout schema
 model Layouts {
-  id             String           @id @default(cuid())
-  name           String           @unique
-  createdBy      User             @relation(fields: [createdById], references: [id])
-  createdById    String
-  Layout_Widgets Layout_Widgets[]
+  id          String  @id @default(cuid())
+  dashboardId String
+  w           Int
+  h           Int
+  x           Int
+  y           Int
+  i           String
+  moved       Boolean
+  static      Boolean
+
+  dasboard Dashboards @relation(fields: [dashboardId], references: [id], onDelete: Cascade)
 }
 
 //Widget schema
 model Widgets {
-  id             String           @id @default(cuid())
-  name           String           @unique
-  description    String
-  Layout_Widgets Layout_Widgets[]
+  id          String @id @default(cuid())
+  dashboardId String
+  name        String
+
+  dasboard Dashboards @relation(fields: [dashboardId], references: [id], onDelete: Cascade)
 
   @@index([name])
-}
-
-//Layout_Widget schema
-model Layout_Widgets {
-  layoutId     String
-  widgetId     String
-  widgetConfig Json?
-
-  layout Layouts @relation(fields: [layoutId], references: [id])
-  widget Widgets @relation(fields: [widgetId], references: [id])
-
-  @@id([layoutId, widgetId])
 }
 
 // Necessary for Next auth
@@ -82,8 +90,8 @@ model User {
   image            String?
   accounts         Account[]
   sessions         Session[]
-  Layouts          Layouts[]
   CryptoLoginNonce CryptoLoginNonce?
+  Dashboards       Dashboards[]
 
   @@index([email])
 }
