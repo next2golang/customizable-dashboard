@@ -1,5 +1,6 @@
 import { useEffect, useState, memo, useMemo } from 'react';
 import { WidthProvider, Responsive, type Layouts, type Layout } from 'react-grid-layout';
+import { useAccount } from 'wagmi';
 
 import StockChart from '~/widgets/StockChart/StockChart';
 import AirQuality from '~/widgets/AirQuality/AirQuality';
@@ -21,7 +22,7 @@ import { apiGet } from '~/utils/apiUtils';
 import { PubSubEvent, usePub, useSub } from '~/hooks/usePubSub';
 import { useAppContext } from '~/hooks/useAppContext';
 import { deleteSettings } from '~/hooks/useWidgetSettings';
-import { saveTabDB, saveTabLS } from '../lib/MainPageUtils';
+import { saveTabDB, getTabDB, saveTabLS } from '../lib/MainPageUtils';
 import { type UserWidget, type Widget } from '../../types';
 import { Toast } from '~/components/base';
 import { Button } from '~/components/base';
@@ -39,7 +40,7 @@ interface DashboardContentProps {
   RemoveDashboard: () => void;
 }
 const Dashboardcontent: React.FC<DashboardContentProps> = ({ tabKey, title, onTitleChange, RemoveDashboard }) => {
-
+  const { address } = useAccount();
   const ResponsiveGridLayout = WidthProvider(Responsive);
 
   const [addmodalShowed, setAddmodalShowed] = useState(false);
@@ -50,8 +51,10 @@ const Dashboardcontent: React.FC<DashboardContentProps> = ({ tabKey, title, onTi
 
   const [isReady, setIsReady] = useState(false);
 
-  const [userWidgets, setUserWidgets] = useState<UserWidget[]>(getLS(`userWidgets${tab}`, DefaultWidgets, true));
-  const [layout, setLayout] = useState<Layout[]>(getLS(`userLayout${tab}`, DefaultLayout, true));
+  // const [userWidgets, setUserWidgets] = useState<UserWidget[]>(getLS(`userWidgets${tab}`, DefaultWidgets, true));
+  // const [layout, setLayout] = useState<Layout[]>(getLS(`userLayout${tab}`, DefaultLayout, true));
+  const [userWidgets, setUserWidgets] = useState<UserWidget[]>(DefaultWidgets);
+  const [layout, setLayout] = useState<Layout[]>(DefaultLayout);
   const [currentBreakpoint, setCurrentBreakpoint] = useState('');
 
   const getLSLayout = (size: string) => {
@@ -73,9 +76,20 @@ const Dashboardcontent: React.FC<DashboardContentProps> = ({ tabKey, title, onTi
 
   useEffect(() => {
     // alert('first')
-    const fetchUserSettings = async () => {
+    const fetchData = async () => {
       // console.log(tab)
       setIsReady(false);
+      const response = await getTabDB(address?.toString()!, tab);
+      if (response.userWidgets == null) {
+        setUserWidgets(DefaultWidgets);
+        setLayout(DefaultLayout);
+      }
+      else {
+        setUserWidgets(response.userWidgets);
+        setLayout(response.userLayout);
+      }
+      console.log(response)
+      setIsReady(true);
       // const token = localStorage.getItem('tk') ?? '';
       // if (token) {
       //   const timestamp = new Date().toISOString().split('.')[0]; // 2023-11-03T15:06:24 (removed nanosecs)
@@ -97,22 +111,22 @@ const Dashboardcontent: React.FC<DashboardContentProps> = ({ tabKey, title, onTi
       //   xxs: layout
       // });
 
-      setTimeout(() => {
-        setLayouts({});
-        setTimeout(() => {
-          setLayouts({
-            xl: layout,
-            lg: layout,
-            md: layout,
-            sm: layout,
-            xs: layout,
-            xxs: layout
-          });
-          setIsReady(true);
-        }, 10);
-      }, 10);
+      // setTimeout(() => {
+      //   setLayouts({});
+      //   setTimeout(() => {
+      //     setLayouts({
+      //       xl: layout,
+      //       lg: layout,
+      //       md: layout,
+      //       sm: layout,
+      //       xs: layout,
+      //       xxs: layout
+      //     });
+      //     setIsReady(true);
+      //   }, 10);
+      // }, 10);
     };
-    fetchUserSettings();
+    fetchData();
   }, []);
 
   useSub(PubSubEvent.Delete, async (wid: string) => {
@@ -163,8 +177,8 @@ const Dashboardcontent: React.FC<DashboardContentProps> = ({ tabKey, title, onTi
       // if (movingToastShowed) {
       // only save layout when moving widgets
       // alert('OnLayoutChange');
-      saveTabLS(tab, userWidgets, currentLayout);
-      saveTabDB(tab, title, userWidgets, currentLayout);
+      // saveTabLS(tab, userWidgets, currentLayout);
+      saveTabDB(address?.toString()!, tab, title, userWidgets, currentLayout);
 
       localStorage.setItem(`userLayout${tab}${currentBreakpoint}`, JSON.stringify(currentLayout));
       // }
@@ -230,7 +244,7 @@ const Dashboardcontent: React.FC<DashboardContentProps> = ({ tabKey, title, onTi
       isResizable={false}
     >
       {
-        userWidgets.map((widget: UserWidget, idx: number) => {
+        userWidgets?.map((widget: UserWidget, idx: number) => {
           const wid = widget?.wid ?? '';
           const type = wid.split('-')[0];
           const cn = ``;

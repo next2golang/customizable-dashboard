@@ -47,11 +47,11 @@ model Layouts {
 model Widgets {
   id          String @id @default(cuid())
   dashboardId String
-  name        String
+  wid         String //widget name
 
   dasboard Dashboards @relation(fields: [dashboardId], references: [id], onDelete: Cascade)
 
-  @@index([name])
+  @@index([wid])
 }
 
 // Necessary for Next auth

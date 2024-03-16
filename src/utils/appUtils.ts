@@ -1,5 +1,6 @@
 import { WidgetHeight } from './constants';
-import { useState, useEffect } from 'react'
+import { useState, useEffect } from 'react';
+
 export function getLS(key: string, defaultValue: any, parseJson = false) {
   let value = localStorage.getItem(key);
   if (value === 'undefined') {

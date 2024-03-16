@@ -2,6 +2,8 @@ import React, { useEffect, useRef, useState, memo } from 'react';
 import { Tabs, Tab } from '@nextui-org/react';
 
 import Dashboardcontent from '~/components/Dashboardcontent';
+import { removeTabDB, getDashboards } from '../lib/MainPageUtils';
+import { useAccount } from 'wagmi';
 
 import {
     AlertDialog,
@@ -16,69 +18,90 @@ import {
 } from '~/components/ui/alert-dialog'
 
 const initialItems = [
-    { title: 'Dashboard 1', children: '', key: '1' },
+    { name: 'Dashboard 1', tab: '1' },
 ];
 
 const DashboardTabs = () => {
+    const { address } = useAccount();
     // const [tablabels, setTabLabels] = useState<string[]>(Loaditemsfromlocalstorage);
     const [tablabels, setTabLabels] = useState<string[]>(['Dashboard1']);
-    const [activeKey, setActiveKey] = useState(initialItems[0]?.key);
-    const [activeTitle, setActiveTitle] = useState(initialItems[0]?.title);
+    const [activeKey, setActiveKey] = useState(initialItems[0]?.tab);
+    const [activeTitle, setActiveTitle] = useState(initialItems[0]?.name);
     const [items, setItems] = useState(initialItems);
 
     const newTabIndex = useRef(2);
+
+    useEffect(() => {
+        const fetchDashboards = async () => {
+            getDashboards
+
+            const response = await getDashboards(address?.toString()!);
+            if (response == null) {
+                setItems(initialItems);
+            }
+            else {
+                setItems(response.data);
+            }
+            console.log(response)
+        }
+
+        fetchDashboards();
+    }, [])
 
     const add = () => {
         setTabLabels([...tablabels, `Dashboard${tablabels.length + 1}`])
         const newActiveKey = `${newTabIndex.current++}`;
         const newPanes = [...items];
-        newPanes.push({ title: `Dashboard${tablabels.length + 1}`, children: '', key: newActiveKey });
+        newPanes.push({ name: `Dashboard${tablabels.length + 1}`, tab: newActiveKey });
         setItems(newPanes);
         setActiveKey(newActiveKey);
-        const title = newPanes.filter((item) => item.key === newActiveKey)[0]?.title;
+        const title = newPanes.filter((item) => item.tab === newActiveKey)[0]?.name;
         setActiveTitle(title)
     }
 
-    const remove = (targetKey: string) => {
+    const remove = async (targetKey: string) => {
+        let newActiveKey = activeKey;
+        let lastIndex = -1;
+        items.forEach((item, i) => {
+            if (item.tab === targetKey) {
+                lastIndex = i - 1;
+            }
+        });
+        const newPanes = items.filter((item) => item.tab !== targetKey);
+        if (newPanes.length && newActiveKey === targetKey) {
+            if (lastIndex >= 0) {
+                newActiveKey = newPanes[lastIndex]?.tab;
+            } else {
+                newActiveKey = newPanes[0]?.tab;
+            }
+        }
+        setItems(newPanes);
+        setActiveKey(newActiveKey);
+        const title = newPanes.filter((item) => item.tab === newActiveKey)[0]?.name;
+        setActiveTitle(title)
+
+        await removeTabDB(address?.toString()!, Number(activeKey));
+
         localStorage.removeItem(`userWidgets${activeKey}`);
         localStorage.removeItem(`userLayout${activeKey}`);
         localStorage.removeItem(`userLayout${activeKey}sm`);
         localStorage.removeItem(`userLayout${activeKey}md`);
         localStorage.removeItem(`userLayout${activeKey}lg`);
         localStorage.removeItem(`userLayout${activeKey}xl`);
-
-        let newActiveKey = activeKey;
-        let lastIndex = -1;
-        items.forEach((item, i) => {
-            if (item.key === targetKey) {
-                lastIndex = i - 1;
-            }
-        });
-        const newPanes = items.filter((item) => item.key !== targetKey);
-        if (newPanes.length && newActiveKey === targetKey) {
-            if (lastIndex >= 0) {
-                newActiveKey = newPanes[lastIndex]?.key;
-            } else {
-                newActiveKey = newPanes[0]?.key;
-            }
-        }
-        setItems(newPanes);
-        setActiveKey(newActiveKey);
-        const title = newPanes.filter((item) => item.key === newActiveKey)[0]?.title;
-        setActiveTitle(title)
+        localStorage.removeItem(`userLayout${activeKey}xs`);
     };
 
     const onChange = (key: React.Key) => {
         setActiveKey(key.toString());
-        const title = items.filter((item) => item.key === key.toString())[0]?.title;
+        const title = items.filter((item) => item.tab === key.toString())[0]?.name;
         setActiveTitle(title)
 
     }
 
     const handleChangeTitle = (nTitle: string) => {
         setActiveTitle(nTitle)
-        const activeItem = items.filter((item) => item.key === activeKey)[0];
-        if (activeItem) activeItem.title = nTitle;
+        const activeItem = items.filter((item) => item.tab === activeKey)[0];
+        if (activeItem) activeItem.name = nTitle;
     }
 
     const RemoveDashboard = () => {
@@ -104,10 +127,10 @@ const DashboardTabs = () => {
                 >
                     {items.map((item) => (
                         <Tab
-                            key={item.key}
+                            key={item.tab}
                             title={
                                 <div className="flex items-center justify-between">
-                                    <span>{item.title}</span>
+                                    <span>{item.name}</span>
                                     <AlertDialog>
                                         <AlertDialogTrigger asChild>
                                             <span
