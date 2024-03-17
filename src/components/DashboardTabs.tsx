@@ -17,9 +17,15 @@ import {
     AlertDialogTrigger,
 } from '~/components/ui/alert-dialog'
 
-const initialItems = [
+interface InitialItem {
+    name: string;
+    tab : string;
+}
+
+
+let initialItems: InitialItem[] = [
     { name: 'Dashboard 1', tab: '1' },
-];
+]
 
 const DashboardTabs = () => {
     const { address } = useAccount();
