@@ -84,7 +84,7 @@ export default function LofiPlayer({ wid }: Props) {
                 width="250"
                 style={{ height: 40 }}
                 onEnded={() => {
-                  console.log('isPlayRandom', isPlayRandom);
+                  // console.log('isPlayRandom', isPlayRandom);
                   if (isPlayRandom) {
                     // music ended, play the next Random Music
                     playRandomly();

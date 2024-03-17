@@ -36,7 +36,6 @@ export const TopCoins = () => {
 
     fetchData();
 
-    console.log('^^^^^^^^^^^^^^^^^^')
     return () => source.cancel();
   }, []);
 
