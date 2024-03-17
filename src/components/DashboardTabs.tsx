@@ -40,7 +40,7 @@ const DashboardTabs = () => {
 
     useEffect(() => {
         const fetchDashboards = async () => {
-            // getDashboards
+             getDashboards
 
             const response = await getDashboards(address?.toString()!);
             console.log("response data", response.data)
