@@ -17,9 +17,16 @@ import {
     AlertDialogTrigger,
 } from '~/components/ui/alert-dialog'
 
-const initialItems = [
+
+interface InitialItem {
+    name: string;
+    tab : string;
+}
+
+
+let initialItems: InitialItem[] = [
     { name: 'Dashboard 1', tab: '1' },
-];
+]
 
 const DashboardTabs = () => {
     const { address } = useAccount();
@@ -27,22 +34,25 @@ const DashboardTabs = () => {
     const [tablabels, setTabLabels] = useState<string[]>(['Dashboard1']);
     const [activeKey, setActiveKey] = useState(initialItems[0]?.tab);
     const [activeTitle, setActiveTitle] = useState(initialItems[0]?.name);
-    const [items, setItems] = useState(initialItems);
+    const [items, setItems] = useState<InitialItem[]>([]);
 
     const newTabIndex = useRef(2);
 
     useEffect(() => {
         const fetchDashboards = async () => {
-            getDashboards
+            // getDashboards
 
             const response = await getDashboards(address?.toString()!);
+            console.log("response data", response.data)
             if (response == null) {
-                setItems(initialItems);
-            }
-            else {
+                // setItems([...items, response.data]);
                 setItems(response.data);
             }
-            console.log(response)
+            else {
+                // setItems([...items, response.data]);
+                setItems(response.data);
+            }
+            console.log('response',response)
         }
 
         fetchDashboards();
