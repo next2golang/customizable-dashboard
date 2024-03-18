@@ -12,7 +12,7 @@ export default async function fetchDashboards(
     res: NextApiResponse<FetchLayoutResponse>
 ) {
     try {
-        console.log(req.query, '----------------')
+        console.log(req.query, '/////----------------')
         const user = await db.user.findUnique({
             where: { walletAddress: req.query.walletaddress?.toString()! }
         })
