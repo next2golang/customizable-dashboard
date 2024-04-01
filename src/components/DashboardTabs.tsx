@@ -31,28 +31,25 @@ let initialItems: InitialItem[] = [
 const DashboardTabs = () => {
     const { address } = useAccount();
     // const [tablabels, setTabLabels] = useState<string[]>(Loaditemsfromlocalstorage);
-    const [tablabels, setTabLabels] = useState<string[]>(['Dashboard1']);
+    const [tablabels, setTabLabels] = useState<string[]>(['Dashboard 1']);
+    const [key, setKey] = useState(1);
     const [activeKey, setActiveKey] = useState(initialItems[0]?.tab);
     const [activeTitle, setActiveTitle] = useState(initialItems[0]?.name);
-    const [items, setItems] = useState<InitialItem[]>([]);
+    const [items, setItems] = useState<InitialItem[]>(initialItems);
 
     const newTabIndex = useRef(2);
 
     useEffect(() => {
         const fetchDashboards = async () => {
-             getDashboards
-
             const response = await getDashboards(address?.toString()!);
             console.log("response data", response.data)
-            if (response == null) {
+            if (response.data.length != 0) {
                 // setItems([...items, response.data]);
                 setItems(response.data);
+                console.log(response.data[response.data.length-1].tab,'---------------')
+                for(let i = 0; i<response.data.length; i++) 
+                setTabLabels([...tablabels, response.data[response.data.length-1].name]);
             }
-            else {
-                // setItems([...items, response.data]);
-                setItems(response.data);
-            }
-            console.log('response',response)
         }
 
         fetchDashboards();
@@ -63,6 +60,7 @@ const DashboardTabs = () => {
         const newActiveKey = `${newTabIndex.current++}`;
         const newPanes = [...items];
         newPanes.push({ name: `Dashboard${tablabels.length + 1}`, tab: newActiveKey });
+        // newPanes.push({ name: `Dashboard${key + 1}`, tab: newActiveKey });
         setItems(newPanes);
         setActiveKey(newActiveKey);
         const title = newPanes.filter((item) => item.tab === newActiveKey)[0]?.name;
@@ -70,6 +68,7 @@ const DashboardTabs = () => {
     }
 
     const remove = async (targetKey: string) => {
+        await removeTabDB(address?.toString()!, Number(activeKey));
         let newActiveKey = activeKey;
         let lastIndex = -1;
         items.forEach((item, i) => {
@@ -90,7 +89,7 @@ const DashboardTabs = () => {
         const title = newPanes.filter((item) => item.tab === newActiveKey)[0]?.name;
         setActiveTitle(title)
 
-        // await removeTabDB(address?.toString()!, Number(activeKey));
+        
 
         localStorage.removeItem(`userWidgets${activeKey}`);
         localStorage.removeItem(`userLayout${activeKey}`);
@@ -116,6 +115,7 @@ const DashboardTabs = () => {
 
     const RemoveDashboard = () => {
         remove(activeKey!);
+
     }
 
     return (

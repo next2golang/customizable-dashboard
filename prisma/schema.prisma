@@ -37,8 +37,8 @@ model Layouts {
   x           Int
   y           Int
   i           String
-  moved       Boolean
-  static      Boolean
+  moved       Boolean @default(false)
+  static      Boolean @default(false)
 
   dasboard Dashboards @relation(fields: [dashboardId], references: [id], onDelete: Cascade)
 }
