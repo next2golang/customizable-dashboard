@@ -88,6 +88,8 @@ const DashboardTabs = () => {
         const title = newPanes.filter((item) => item.tab === newActiveKey)[0]?.name;
         setActiveTitle(title)
 
+        await removeTabDB(address?.toString()!, Number(activeKey));
+
         localStorage.removeItem(`userWidgets${activeKey}`);
         localStorage.removeItem(`userLayout${activeKey}`);
         localStorage.removeItem(`userLayout${activeKey}sm`);
@@ -111,7 +113,6 @@ const DashboardTabs = () => {
     }
 
     const RemoveDashboard = () => {
-        removeTabDB(address?.toString()!, Number(activeKey));
         remove(activeKey!);
 
     }
