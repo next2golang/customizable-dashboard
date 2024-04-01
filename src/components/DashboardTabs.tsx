@@ -68,7 +68,6 @@ const DashboardTabs = () => {
     }
 
     const remove = async (targetKey: string) => {
-        await removeTabDB(address?.toString()!, Number(activeKey));
         let newActiveKey = activeKey;
         let lastIndex = -1;
         items.forEach((item, i) => {
@@ -88,8 +87,6 @@ const DashboardTabs = () => {
         setActiveKey(newActiveKey);
         const title = newPanes.filter((item) => item.tab === newActiveKey)[0]?.name;
         setActiveTitle(title)
-
-        
 
         localStorage.removeItem(`userWidgets${activeKey}`);
         localStorage.removeItem(`userLayout${activeKey}`);
@@ -114,6 +111,7 @@ const DashboardTabs = () => {
     }
 
     const RemoveDashboard = () => {
+        removeTabDB(address?.toString()!, Number(activeKey));
         remove(activeKey!);
 
     }
