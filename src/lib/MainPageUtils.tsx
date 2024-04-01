@@ -50,7 +50,7 @@ export async function getTabDB(address: string, tab: number) {
 
 export async function removeTabDB(address: string, tab: number) {
   try {
-    const res = await fetch(`/api/dashboard/fetchLayouts?walletaddress=${address}&tab=${tab}`, {
+    const res = await fetch(`/api/dashboard/removeLayouts?walletaddress=${address}&tab=${tab}`, {
       method: 'GET',
       headers: {
         "Content-Type": "application/json",
